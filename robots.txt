@@ -1,0 +1,6 @@
+# Aerium — open to every search engine and AI crawler. Nothing on this
+# site is disallowed for anyone.
+User-agent: *
+Allow: /
+
+Sitemap: https://aerium-browser.github.io/sitemap.xml
