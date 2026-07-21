@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aerium — a browser that stays out of the way</title>
+<meta name="description" content="Aerium is a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android. No telemetry, no bundled Google services, sensible defaults.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z' fill='%231B2C5E'/%3E%3Cpath d='M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z' fill='%232A4485'/%3E%3Cpath d='M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z' fill='%23111C42'/%3E%3Ccircle cx='256' cy='256' r='134' fill='%23E9F1FB'/%3E%3Ccircle cx='256' cy='256' r='104' fill='%232C6BAE'/%3E%3Ccircle cx='238' cy='236' r='82' fill='%234C97CF'/%3E%3Ccircle cx='222' cy='218' r='46' fill='%237FC4E4'/%3E%3C/svg%3E">
+<style>
+ :root{
+  --bg:#ffffff; --bg-alt:#f6f8fb; --fg:#202124; --fg-dim:#5f6368; --border:#e2e5ea;
+  --accent:#1967d2; --accent-dim:#e8f0fe; --card-bg:#ffffff; --card-shadow:0 1px 2px 0 rgba(60,64,67,.15), 0 1px 3px 1px rgba(60,64,67,.1);
+  --hero-grad:linear-gradient(160deg,#eef4fd 0%,#ffffff 55%);
+ }
+ @media (prefers-color-scheme:dark){
+  :root{
+   --bg:#131417; --bg-alt:#1a1c20; --fg:#e8eaed; --fg-dim:#9aa0a6; --border:#2c2f34;
+   --accent:#8ab4f8; --accent-dim:#1e2a3d; --card-bg:#1a1c20; --card-shadow:0 1px 2px 0 rgba(0,0,0,.4), 0 1px 3px 1px rgba(0,0,0,.3);
+   --hero-grad:linear-gradient(160deg,#182234 0%,#131417 60%);
+  }
+ }
+ *{box-sizing:border-box}
+ body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--fg); line-height:1.5}
+ a{color:var(--accent); text-decoration:none}
+ a:hover{text-decoration:underline}
+ .wrap{max-width:74rem; margin:0 auto; padding:0 1.5rem}
+ code{background:rgba(128,128,128,.15); padding:.15em .45em; border-radius:.3em; font-size:.9em}
+
+ header.top{padding:1.25rem 0}
+ header.top .wrap{display:flex; align-items:center; justify-content:space-between}
+ .brand{display:flex; align-items:center; gap:.6rem; font-weight:600; font-size:1.15rem}
+ .brand svg{flex:none}
+ nav.top-links{display:flex; gap:1.5rem; font-size:.95rem}
+
+ .hero{background:var(--hero-grad); padding:4rem 0 5rem; text-align:center}
+ .hero svg.logo{width:96px; height:96px; margin-bottom:1.5rem; filter:drop-shadow(0 4px 18px rgba(25,103,210,.25))}
+ .hero h1{font-size:3rem; margin:0 0 .75rem; letter-spacing:-.02em}
+ .hero p.tagline{font-size:1.25rem; color:var(--fg-dim); max-width:38rem; margin:0 auto 2.25rem}
+ .hero .ctas{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap}
+ .btn{display:inline-flex; align-items:center; gap:.5em; padding:.75em 1.6em; border-radius:2em; font-weight:600; font-size:1rem; transition:transform .15s ease}
+ .btn:hover{transform:translateY(-1px); text-decoration:none}
+ .btn-primary{background:var(--accent); color:#fff}
+ .btn-secondary{background:var(--card-bg); color:var(--fg); border:1px solid var(--border)}
+
+ section{padding:4.5rem 0}
+ section.alt{background:var(--bg-alt)}
+ h2.section-title{font-size:2rem; text-align:center; margin:0 0 .5rem; letter-spacing:-.01em}
+ p.section-sub{text-align:center; color:var(--fg-dim); max-width:36rem; margin:0 auto 3rem; font-size:1.05rem}
+
+ .story{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center}
+ .story .art{display:flex; justify-content:center}
+ .story .art svg{width:220px; height:220px}
+ .story h2{font-size:2rem; margin:0 0 1rem; letter-spacing:-.01em}
+ .story p{color:var(--fg-dim); font-size:1.05rem}
+ .story p strong{color:var(--fg)}
+ @media(max-width:860px){.story{grid-template-columns:1fr}}
+
+ .features{display:grid; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr)); gap:1.25rem}
+ .card{background:var(--card-bg); border:1px solid var(--border); border-radius:.9rem; padding:1.6rem; box-shadow:var(--card-shadow)}
+ .card h3{margin:0 0 .5rem; font-size:1.1rem; display:flex; align-items:center; gap:.5em}
+ .card p{margin:0; color:var(--fg-dim); font-size:.95rem}
+
+ .platforms{display:grid; grid-template-columns:repeat(auto-fit,minmax(17rem,1fr)); gap:1.5rem}
+ .platform-card{background:var(--card-bg); border:1px solid var(--border); border-radius:1rem; padding:2rem; box-shadow:var(--card-shadow); display:flex; flex-direction:column; gap:.9rem}
+ .platform-card .icon{width:44px; height:44px}
+ .platform-card h3{margin:0; font-size:1.3rem}
+ .platform-card p{margin:0; color:var(--fg-dim); font-size:.95rem; flex:1}
+ .platform-card .links{display:flex; gap:1rem; align-items:center; margin-top:.5rem; font-size:.9rem}
+
+ footer{padding:3rem 0; border-top:1px solid var(--border)}
+ footer .wrap{display:flex; flex-direction:column; gap:1rem; align-items:center; text-align:center; color:var(--fg-dim); font-size:.9rem}
+ footer .foot-links{display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center}
+</style>
+</head>
+<body>
+
+<header class="top">
+ <div class="wrap">
+  <div class="brand">
+   <svg width="26" height="26" viewBox="0 0 512 512"><path d="M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z" fill="#1B2C5E"/><path d="M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z" fill="#2A4485"/><path d="M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z" fill="#111C42"/><circle cx="256" cy="256" r="134" fill="#E9F1FB"/><circle cx="256" cy="256" r="104" fill="#2C6BAE"/><circle cx="238" cy="236" r="82" fill="#4C97CF"/><circle cx="222" cy="218" r="46" fill="#7FC4E4"/></svg>
+   Aerium
+  </div>
+  <nav class="top-links">
+   <a href="#platforms">Download</a>
+   <a href="#features">Features</a>
+   <a href="#story">About</a>
+   <a href="https://github.com/fatih-gh">GitHub</a>
+  </nav>
+ </div>
+</header>
+
+<section class="hero">
+ <div class="wrap">
+  <svg class="logo" viewBox="0 0 512 512" role="img" aria-label="Aerium logo">
+   <path d="M 330 384.17 L 149.1 488.61 A 256 256 0 0 1 108 47.12 L 108 256 A 148 148 0 0 0 330 384.17 Z" fill="#1B2C5E"/>
+   <path d="M 108 256 L 108 47.12 A 256 256 0 0 1 510.9 232.27 L 330 127.83 A 148 148 0 0 0 108 256 Z" fill="#2A4485"/>
+   <path d="M 330 127.83 L 510.9 232.27 A 256 256 0 0 1 149.1 488.61 L 330 384.17 A 148 148 0 0 0 330 127.83 Z" fill="#111C42"/>
+   <circle cx="388" cy="96" r="5" fill="#FFFFFF" opacity="0.95"/>
+   <circle cx="318" cy="60" r="3" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="430" cy="178" r="3.5" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="368" cy="140" r="2.5" fill="#FFFFFF" opacity="0.95"/>
+   <circle cx="96" cy="132" r="4" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="60" cy="210" r="3" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="140" cy="78" r="3" fill="#FFFFFF" opacity="0.95"/>
+   <circle cx="104" cy="92" r="2.5" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="150" cy="400" r="4.5" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="92" cy="340" r="3" fill="#FFFFFF" opacity="0.95"/>
+   <circle cx="212" cy="442" r="3" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="252" cy="416" r="2.5" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="402" cy="360" r="4" fill="#FFFFFF" opacity="0.95"/>
+   <circle cx="356" cy="420" r="3" fill="#FFFFFF" opacity="0.55"/>
+   <circle cx="438" cy="296" r="2.5" fill="#FFFFFF" opacity="0.55"/>
+   <path d="M 196 79 Q 198.34 89.66 209 92 Q 198.34 94.34 196 105 Q 193.66 94.34 183 92 Q 193.66 89.66 196 79 Z" fill="#FFFFFF" opacity="0.9"/>
+   <circle cx="256" cy="256" r="134" fill="#E9F1FB"/>
+   <circle cx="256" cy="256" r="104" fill="#2C6BAE"/>
+   <circle cx="238" cy="236" r="82" fill="#4C97CF"/>
+   <circle cx="222" cy="218" r="46" fill="#7FC4E4"/>
+  </svg>
+  <h1>A browser that stays out of the way.</h1>
+  <p class="tagline">No telemetry calling home, no bundled Google services, no ad platform baked into the settings page. Built on Chromium, stripped of what doesn't belong to you.</p>
+  <div class="ctas">
+   <a class="btn btn-primary" href="#platforms">Get Aerium</a>
+   <a class="btn btn-secondary" href="https://github.com/fatih-gh">View source</a>
+  </div>
+ </div>
+</section>
+
+<section id="story">
+ <div class="wrap story">
+  <div class="art">
+   <svg viewBox="0 0 200 200" role="img" aria-label="Aerogel block illustration">
+    <defs>
+     <radialGradient id="aerogelGrad" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#bcdcfb" stop-opacity=".9"/>
+      <stop offset="60%" stop-color="#6fa8dc" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#3d6fa8" stop-opacity=".35"/>
+     </radialGradient>
+    </defs>
+    <rect x="30" y="30" width="140" height="140" rx="18" fill="url(#aerogelGrad)" stroke="#1967d2" stroke-width="2" stroke-opacity=".4"/>
+    <circle cx="70" cy="70" r="3" fill="#fff" opacity=".8"/>
+    <circle cx="130" cy="55" r="2" fill="#fff" opacity=".6"/>
+    <circle cx="150" cy="110" r="2.5" fill="#fff" opacity=".7"/>
+    <circle cx="60" cy="130" r="2" fill="#fff" opacity=".6"/>
+    <circle cx="110" cy="140" r="3" fill="#fff" opacity=".8"/>
+    <circle cx="95" cy="95" r="2" fill="#fff" opacity=".5"/>
+   </svg>
+  </div>
+  <div>
+   <h2>Named after the lightest solid there is.</h2>
+   <p><strong>Aerium</strong> takes its name from <strong>aerogel</strong> — a material that's up to 99% air by volume, solid enough to hold its shape, light enough to rest on a flower without bending the stem. That's the standard the browser is held to: strip away the weight that doesn't need to be there, keep what actually works.</p>
+   <p>Built by <strong>Dioide</strong> on top of Chromium — using <a href="https://github.com/ungoogled-software/ungoogled-chromium">ungoogled-chromium</a> on Windows and Linux, and a Vanadium-based fork on Android — with a curated set of privacy defaults and a browser identity of its own, not a reskin.</p>
+  </div>
+ </div>
+</section>
+
+<section class="alt" id="features">
+ <div class="wrap">
+  <h2 class="section-title">What you get</h2>
+  <p class="section-sub">The same principles across every platform, adapted to what each one actually supports.</p>
+  <div class="features">
+   <div class="card">
+    <h3>No phoning home</h3>
+    <p>No telemetry, no bundled Google services, no background pings you didn't ask for. Updates are something you check for, not something the browser does quietly on its own.</p>
+   </div>
+   <div class="card">
+    <h3>Extensions that work</h3>
+    <p>The Chrome Web Store is available from the first launch, Manifest V2 included on Android — install and update the same way you would anywhere else.</p>
+   </div>
+   <div class="card">
+    <h3>Search without a middleman</h3>
+    <p>Startpage is the default engine, with DuckDuckGo, DuckDuckGo Lite, DuckDuckGo HTML, and SearXNG ready to pick from Settings.</p>
+   </div>
+   <div class="card">
+    <h3>HTTPS by default</h3>
+    <p>Balanced Mode upgrades navigations to HTTPS automatically, without the disruptive full-site warnings of strict HTTPS-only enforcement.</p>
+   </div>
+   <div class="card">
+    <h3>Global Privacy Control</h3>
+    <p>The <code>Sec-GPC</code> opt-out signal and <code>navigator.globalPrivacyControl</code> — recognized under CCPA, still missing from stock Chromium — are sent on every page, no toggle needed.</p>
+   </div>
+   <div class="card">
+    <h3>Privacy flags, visible not silent</h3>
+    <p>Fingerprinting resistance, reduced system info, and more are one click away in <code>chrome://flags</code> — listed plainly on first run instead of switched on for you without asking.</p>
+   </div>
+   <div class="card">
+    <h3>Your own colors</h3>
+    <p>Its own name, its own icon — the appearance picker in Settings works exactly like stock Chromium. Nothing forces a palette on top of it.</p>
+   </div>
+   <div class="card">
+    <h3>DRM, your call</h3>
+    <p>Widevine isn't registered unless you turn it on yourself at <code>chrome://flags/#enable-widevine</code>. No silent probing for it on every DRM-gated site.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="platforms">
+ <div class="wrap">
+  <h2 class="section-title">Available now</h2>
+  <p class="section-sub">Free, open-source, built on public infrastructure. Pick your platform.</p>
+  <div class="platforms">
+
+   <div class="platform-card">
+    <svg class="icon" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 12.4L36 7.5V42H0V12.4Z" fill="#1967d2"/><path d="M40 7V42H88V0L40 7Z" fill="#1967d2" opacity=".7"/><path d="M0 46H36V80.6L0 75.6V46Z" fill="#1967d2" opacity=".7"/><path d="M40 46H88V88L40 81V46Z" fill="#1967d2"/></svg>
+    <h3>Windows</h3>
+    <p>Built on ungoogled-chromium. Standard installer, same shortcuts and Start Menu integration you already know.</p>
+    <div class="links">
+     <a class="btn btn-primary" href="https://github.com/fatih-gh/aerium-browser-windows/releases/latest">Download</a>
+     <a href="https://github.com/fatih-gh/aerium-browser-windows">Source</a>
+    </div>
+   </div>
+
+   <div class="platform-card">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C9 2 7 5 7 8.5c0 1.5.5 2.5 1 3.5-2 1-4 3.5-4 6.5 0 2.5 3.5 3.5 8 3.5s8-1 8-3.5c0-3-2-5.5-4-6.5.5-1 1-2 1-3.5C17 5 15 2 12 2Z" fill="#1967d2"/><circle cx="9.5" cy="9" r="1.2" fill="#fff"/><circle cx="14.5" cy="9" r="1.2" fill="#fff"/></svg>
+    <h3>Linux</h3>
+    <p>Portable AppImage, no installation needed. Self-updates in place via zsync. Built with ungoogled-chromium-portablelinux.</p>
+    <div class="links">
+     <a class="btn btn-primary" href="https://github.com/fatih-gh/aerium-browser-linux/releases/latest">Download</a>
+     <a href="https://github.com/fatih-gh/aerium-browser-linux">Source</a>
+    </div>
+   </div>
+
+   <div class="platform-card">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="2" width="12" height="20" rx="2.5" fill="#1967d2"/><rect x="8.5" y="4.5" width="7" height="13" fill="#fff" opacity=".25"/><circle cx="12" cy="19" r="1" fill="#fff"/></svg>
+    <h3>Android</h3>
+    <p>Forked from a Vanadium-based build. Full extension support including Manifest V2 — something most Android browsers still can't do.</p>
+    <div class="links">
+     <a class="btn btn-primary" href="https://github.com/fatih-gh/aerium-browser-android/releases/latest">Download</a>
+     <a href="https://github.com/fatih-gh/aerium-browser-android">Source</a>
+    </div>
+   </div>
+
+  </div>
+ </div>
+</section>
+
+<footer>
+ <div class="wrap">
+  <div class="foot-links">
+   <a href="https://github.com/fatih-gh/aerium-browser-windows">Windows</a>
+   <a href="https://github.com/fatih-gh/aerium-browser-linux">Linux</a>
+   <a href="https://github.com/fatih-gh/aerium-browser-android">Android</a>
+   <a href="https://github.com/ungoogled-software/ungoogled-chromium">ungoogled-chromium</a>
+  </div>
+  <p>Aerium is an independent project by Dioide, built on the open-source Chromium project. Not affiliated with or endorsed by Google.</p>
+ </div>
+</footer>
+
+</body>
+</html>
