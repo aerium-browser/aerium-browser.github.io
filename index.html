@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aerium — a browser that stays out of the way</title>
 <meta name="description" content="Aerium is a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android. No telemetry, no bundled Google services, sensible defaults.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aerium-browser.github.io/">
+<meta property="og:title" content="Aerium — a browser that stays out of the way">
+<meta property="og:description" content="Aerium is a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android. No telemetry, no bundled Google services, sensible defaults.">
+<meta property="og:image" content="https://raw.githubusercontent.com/aerium-browser/aerium-browser-windows/master/brand/product_logo_256.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Aerium — a browser that stays out of the way">
+<meta name="twitter:description" content="Aerium is a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android. No telemetry, no bundled Google services, sensible defaults.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/aerium-browser/aerium-browser-windows/master/brand/product_logo_256.png">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z' fill='%231B2C5E'/%3E%3Cpath d='M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z' fill='%232A4485'/%3E%3Cpath d='M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z' fill='%23111C42'/%3E%3Ccircle cx='256' cy='256' r='134' fill='%23E9F1FB'/%3E%3Ccircle cx='256' cy='256' r='104' fill='%232C6BAE'/%3E%3Ccircle cx='238' cy='236' r='82' fill='%234C97CF'/%3E%3Ccircle cx='222' cy='218' r='46' fill='%237FC4E4'/%3E%3C/svg%3E">
 <style>
@@ -29,7 +38,8 @@
 
  header.top{padding:1.25rem 0}
  header.top .wrap{display:flex; align-items:center; gap:2.5rem}
- .brand{display:flex; align-items:center; gap:.6rem; font-weight:600; font-size:1.15rem}
+ .brand{display:flex; align-items:center; gap:.6rem; font-weight:600; font-size:1.15rem; color:inherit}
+ .brand:hover{text-decoration:none; opacity:.8}
  .brand svg{flex:none}
  nav.top-links{display:flex; gap:1.5rem; font-size:.95rem}
 
@@ -95,10 +105,10 @@
 
 <header class="top">
  <div class="wrap">
-  <div class="brand">
+  <a class="brand" href="/">
    <svg width="26" height="26" viewBox="0 0 512 512"><path d="M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z" fill="#1B2C5E"/><path d="M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z" fill="#2A4485"/><path d="M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z" fill="#111C42"/><circle cx="256" cy="256" r="134" fill="#E9F1FB"/><circle cx="256" cy="256" r="104" fill="#2C6BAE"/><circle cx="238" cy="236" r="82" fill="#4C97CF"/><circle cx="222" cy="218" r="46" fill="#7FC4E4"/></svg>
    Aerium
-  </div>
+  </a>
   <nav class="top-links">
    <a href="#platforms">Download</a>
    <a href="#features">Features</a>
