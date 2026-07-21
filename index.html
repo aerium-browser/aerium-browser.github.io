@@ -28,7 +28,7 @@
  code{background:rgba(128,128,128,.15); padding:.15em .45em; border-radius:.3em; font-size:.9em}
 
  header.top{padding:1.25rem 0}
- header.top .wrap{display:flex; align-items:center; justify-content:space-between}
+ header.top .wrap{display:flex; align-items:center; gap:2.5rem}
  .brand{display:flex; align-items:center; gap:.6rem; font-weight:600; font-size:1.15rem}
  .brand svg{flex:none}
  nav.top-links{display:flex; gap:1.5rem; font-size:.95rem}
@@ -74,8 +74,7 @@
 
  @media(max-width:640px){
   .wrap{padding:0 1.25rem}
-  header.top .wrap{flex-direction:column; align-items:flex-start; gap:.75rem}
-  nav.top-links{gap:1rem; font-size:.9rem; flex-wrap:wrap}
+  nav.top-links{display:none}
   .hero{padding:2.75rem 0 3rem}
   .hero svg.logo{width:72px; height:72px; margin-bottom:1.1rem}
   .hero h1{font-size:2rem}
