@@ -1,6 +1,6 @@
-# fatih-gh.github.io
+# aerium-browser.github.io
 
-Landing page for [Aerium](https://fatih-gh.github.io), a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android.
+Landing page for [Aerium](https://aerium-browser.github.io), a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android.
 
 Source repos:
 - [aerium-browser-windows](https://github.com/fatih-gh/aerium-browser-windows)
