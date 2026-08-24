@@ -99,6 +99,9 @@
  .features{display:grid; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr)); gap:1.25rem}
  .card{background:var(--card-bg); border:1px solid var(--border); border-radius:.9rem; padding:1.6rem; box-shadow:var(--card-shadow)}
  .card h3{margin:0 0 .5rem; font-size:1.1rem; display:flex; align-items:center; gap:.5em}
+ .badge{background:var(--accent-dim); color:var(--accent); font-size:.66rem; font-weight:600;
+  letter-spacing:.04em; text-transform:uppercase; padding:.15rem .45rem; border-radius:999px;
+  white-space:nowrap}
  .card p{margin:0; color:var(--fg-dim); font-size:.95rem}
 
  .platforms{display:grid; grid-template-columns:repeat(auto-fit,minmax(17rem,1fr)); gap:1.5rem}
@@ -249,6 +252,22 @@
     <h3>DRM, your call</h3>
     <p>Widevine isn't registered unless you turn it on yourself at <code>chrome://flags/#enable-widevine</code>. No silent probing for it on every DRM-gated site.</p>
    </div>
+   <div class="card">
+    <h3>Aerium Guard <span class="badge">Desktop</span></h3>
+    <p>Three setup modes — Recommended, Privacy and Performance — each a named set of defaults rather than a page of switches to work through. Pick one from the shield in the address bar and the browser moves with it. The shield always says which mode is in force.</p>
+   </div>
+   <div class="card">
+    <h3>Cookies that don't outlive the visit <span class="badge">Desktop</span></h3>
+    <p>Delete browsing data when you close Aerium, choosing which kinds go — with a keep list for the few sites worth staying signed into. Or mark a single site to reset the moment its last tab closes, without touching anything else.</p>
+   </div>
+   <div class="card">
+    <h3>No password manager, deliberately <span class="badge">Desktop</span></h3>
+    <p>Aerium stores no passwords, payment methods or addresses, and the settings for them are gone rather than merely emptied. Forms are filled by whichever autofill service your system is set to use — Bitwarden, Proton Pass, KeePass — instead of a second vault living inside the browser.</p>
+   </div>
+   <div class="card">
+    <h3>Every change, written down <span class="badge">Desktop</span></h3>
+    <p><code>chrome://aerium</code> lists every patch applied on top of Chromium, by name. What has been changed to make this browser is something you can read, rather than something you take on trust.</p>
+   </div>
   </div>
  </div>
 </section>
@@ -291,7 +310,12 @@
 
   </div>
  </div>
-</section>
+
+  <p class="section-sub" style="margin-top:1.75rem">
+   Aerium Guard, the cookie controls and <code>chrome://aerium</code> are desktop-only
+   today. The Android build tracks Vanadium and does not have them yet.
+  </p>
+ </section>
 
 <footer>
  <div class="wrap">
