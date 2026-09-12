@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aerium: a browser that stays out of the way</title>
-<meta name="description" content="Aerium is a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android. No telemetry, no bundled Google services, sensible defaults.">
+<meta name="description" content="A de-googled Chromium browser with real Chrome extensions on Android, Manifest V2 included, plus Windows and Linux builds with no telemetry or Google services.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aerium-browser.github.io/">
 <meta property="og:title" content="Aerium: a browser that stays out of the way">
-<meta property="og:description" content="Aerium is a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android. No telemetry, no bundled Google services, sensible defaults.">
+<meta property="og:description" content="A de-googled Chromium browser with real Chrome extensions on Android, Manifest V2 included, plus Windows and Linux builds with no telemetry or Google services.">
 <meta property="og:image" content="https://raw.githubusercontent.com/aerium-browser/aerium-browser-windows/master/brand/product_logo_256.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Aerium: a browser that stays out of the way">
-<meta name="twitter:description" content="Aerium is a privacy-focused, de-googled Chromium browser for Windows, Linux, and Android. No telemetry, no bundled Google services, sensible defaults.">
+<meta name="twitter:description" content="A de-googled Chromium browser with real Chrome extensions on Android, Manifest V2 included, plus Windows and Linux builds with no telemetry or Google services.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/aerium-browser/aerium-browser-windows/master/brand/product_logo_256.png">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://aerium-browser.github.io/">
@@ -554,12 +554,13 @@
     <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="2" width="12" height="20" rx="2.5" fill="#1967d2"/><rect x="8.5" y="4.5" width="7" height="13" fill="#fff" opacity=".25"/><circle cx="12" cy="19" r="1" fill="#fff"/></svg>
     <span class="you-badge" hidden>Your device</span>
     <h3>Android</h3>
-    <p>Forked from a Vanadium-based build. Full extension support including Manifest V2, something most Android browsers still cannot do. The download is large, around 300 MB, because extensions mean shipping Chromium’s desktop build. <a href="https://github.com/aerium-browser/aerium-browser-android#why-the-download-is-large">Here is why</a>.</p>
+    <p>Forked from a Vanadium-based build. Full extension support including Manifest V2, something most Android browsers still cannot do. Kiwi Browser used to be the answer to that and stopped receiving updates in January 2026; this picks up where it left off, on a security-hardened Chromium base. The download is large, around 300 MB, because extensions mean shipping Chromium's desktop build. <a href="https://github.com/aerium-browser/aerium-browser-android#why-the-download-is-large">Here is why</a>.</p>
     <p class="rel-line" data-rel="android"><span class="rel-meta">Loading latest release</span></p>
     <div class="links">
      <a class="btn btn-primary btn-small" href="https://github.com/aerium-browser/aerium-browser-android/releases/latest">Download</a>
      <a class="btn btn-secondary btn-small" href="https://github.com/aerium-browser/aerium-browser-android/blob/main/CHANGELOG.md">Changelog</a>
      <a href="https://github.com/aerium-browser/aerium-browser-android">Source</a>
+     <a id="x64Link" href="https://github.com/aerium-browser/aerium-browser-android/releases" hidden>x86_64 build (emulators, x86 tablets)</a>
     </div>
    </div>
 
@@ -803,6 +804,34 @@
     });
   });
 
+  /* ---------- Android x86_64 prerelease ----------
+     Deliberately its own fetch: the x86_64 build is published as a GitHub
+     "prerelease" (see build-x64.yml) precisely so /releases/latest keeps
+     pointing arm64 users, who are almost everyone, at an APK that installs
+     on their device. That means it never shows up in the fetch above, so an
+     x86 visitor otherwise has no way to find it short of already knowing it
+     exists and reading the tag list by hand. */
+  var x64Link = document.getElementById("x64Link");
+  if (x64Link) {
+    fetch("https://api.github.com/repos/aerium-browser/aerium-browser-android/releases?per_page=10",
+          { headers: { Accept: "application/vnd.github+json" } })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (list) {
+        var x64 = null;
+        for (var i = 0; i < (list || []).length; i++) {
+          if (/-x64-/.test(list[i].tag_name)) { x64 = list[i]; break; }
+        }
+        if (!x64) return;
+        var asset = null;
+        (x64.assets || []).forEach(function (a) {
+          if (/\.apk$/i.test(a.name)) asset = a;
+        });
+        x64Link.href = (asset && asset.browser_download_url) || x64.html_url;
+        x64Link.hidden = false;
+      })
+      .catch(function () {});
+  }
+
   /* ---------- device readout, shown when a download is clicked ---------- */
   var specs = document.getElementById("specs");
   var specsList = document.getElementById("specsList");
@@ -835,7 +864,7 @@
       return "Pick the AppImage matching your architecture, mark it executable and run it.";
     }
     if (arch === "x86_64" || arch === "x86") {
-      return "This looks like an x86 device. Our main APK is arm64-v8a; x86_64 is a prerelease built on request.";
+      return "This looks like an x86 device. Our main APK is arm64-v8a; the “x86_64 build” link on this card is the one for you.";
     }
     if (arch === "arm32") {
       return "This looks like a 32-bit ARM device. We only build arm64-v8a, which will not install here.";
