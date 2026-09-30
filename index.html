@@ -3,44 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aerium: a browser that stays out of the way</title>
-<meta name="description" content="A de-googled Chromium browser for Android with real Chrome extensions, Manifest V2 included, and no telemetry or Google services.">
+<title>Aerium Browser: de-googled Android browser with extensions</title>
+<meta name="description" content="Free, open-source Android browser that runs real Chrome extensions, uBlock Origin and Manifest V2 included. De-googled, no telemetry. A Kiwi Browser alternative.">
+<meta name="application-name" content="Aerium">
+<meta name="apple-mobile-web-app-title" content="Aerium">
+<meta name="theme-color" content="#1967d2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131417" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Aerium">
 <meta property="og:url" content="https://aerium-browser.github.io/">
-<meta property="og:title" content="Aerium: a browser that stays out of the way">
-<meta property="og:description" content="A de-googled Chromium browser for Android with real Chrome extensions, Manifest V2 included, and no telemetry or Google services.">
-<meta property="og:image" content="https://aerium-browser.github.io/brand/product_logo_256.png">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Aerium: a browser that stays out of the way">
-<meta name="twitter:description" content="A de-googled Chromium browser for Android with real Chrome extensions, Manifest V2 included, and no telemetry or Google services.">
-<meta name="twitter:image" content="https://aerium-browser.github.io/brand/product_logo_256.png">
-<meta name="robots" content="index, follow">
+<meta property="og:title" content="Aerium Browser: de-googled Android browser with extensions">
+<meta property="og:description" content="Free, open-source Android browser that runs real Chrome extensions, uBlock Origin and Manifest V2 included. De-googled, no telemetry.">
+<meta property="og:image" content="https://aerium-browser.github.io/brand/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Aerium logo with the text: de-googled Android browser with real Chrome extensions, Manifest V2 included">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aerium Browser: de-googled Android browser with extensions">
+<meta name="twitter:description" content="Free, open-source Android browser that runs real Chrome extensions, uBlock Origin and Manifest V2 included. De-googled, no telemetry.">
+<meta name="twitter:image" content="https://aerium-browser.github.io/brand/social-card.png">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="https://aerium-browser.github.io/">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z' fill='%231B2C5E'/%3E%3Cpath d='M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z' fill='%232A4485'/%3E%3Cpath d='M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z' fill='%23111C42'/%3E%3Ccircle cx='256' cy='256' r='134' fill='%23E9F1FB'/%3E%3Ccircle cx='256' cy='256' r='104' fill='%232C6BAE'/%3E%3Ccircle cx='238' cy='236' r='82' fill='%234C97CF'/%3E%3Ccircle cx='222' cy='218' r='46' fill='%237FC4E4'/%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Aerium",
-  "url": "https://aerium-browser.github.io/",
-  "applicationCategory": "WebBrowser",
-  "operatingSystem": "Android",
-  "description": "Aerium is a privacy-focused, de-googled Chromium browser for Android. No telemetry, no bundled Google services, no ad platform baked into the settings page.",
-  "creator": {
-    "@type": "Organization",
-    "name": "Dioide"
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "downloadUrl": [
-    "https://github.com/aerium-browser/aerium-browser-android/releases/latest"
-  ],
-  "sameAs": [
-    "https://github.com/aerium-browser"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://aerium-browser.github.io/#website",
+      "name": "Aerium",
+      "alternateName": ["Aerium Browser", "aerium-browser.github.io"],
+      "url": "https://aerium-browser.github.io/",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://aerium-browser.github.io/#org" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://aerium-browser.github.io/#org",
+      "name": "Dioide",
+      "url": "https://aerium-browser.github.io/",
+      "logo": "https://aerium-browser.github.io/icon-512.png",
+      "sameAs": ["https://github.com/aerium-browser"]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://aerium-browser.github.io/#app",
+      "name": "Aerium",
+      "alternateName": "Aerium Browser",
+      "url": "https://aerium-browser.github.io/",
+      "image": "https://aerium-browser.github.io/icon-512.png",
+      "screenshot": "https://aerium-browser.github.io/brand/social-card.png",
+      "applicationCategory": "BrowserApplication",
+      "operatingSystem": "Android",
+      "processorRequirements": "arm64, x86_64",
+      "description": "Aerium is a free, open-source, de-googled Chromium browser for Android that installs real Chrome Web Store extensions, Manifest V2 included, with no telemetry and no Google services.",
+      "featureList": [
+        "Chrome Web Store, Opera and Microsoft Edge add-on stores, Manifest V2 included",
+        "uBlock Origin support",
+        "No telemetry and no bundled Google services",
+        "Android autofill for password managers such as Bitwarden",
+        "True black dark mode",
+        "Background media playback",
+        "Per-site cookie and data clearing rules",
+        "Global Privacy Control sent by default",
+        "Canvas and WebGL fingerprinting resistance"
+      ],
+      "isAccessibleForFree": true,
+      "license": "https://github.com/aerium-browser/aerium-browser-android/blob/main/LICENSE",
+      "creator": { "@id": "https://aerium-browser.github.io/#org" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "downloadUrl": "https://github.com/aerium-browser/aerium-browser-android/releases/latest",
+      "sameAs": ["https://github.com/aerium-browser/aerium-browser-android"]
+    }
   ]
 }
 </script>
@@ -73,6 +117,7 @@
 
  .hero{background:var(--hero-grad); padding:4rem 0 5rem; text-align:center}
  .hero svg.logo{width:96px; height:96px; margin-bottom:1.5rem; filter:drop-shadow(0 4px 18px rgba(25,103,210,.25))}
+ .hero .eyebrow{margin:0 0 .75rem; font-size:.9rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
  .hero h1{font-size:3rem; margin:0 0 .75rem; letter-spacing:-.02em}
  .hero p.tagline{font-size:1.25rem; color:var(--fg-dim); max-width:38rem; margin:0 auto 2.25rem}
  .hero .ctas{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap}
@@ -109,6 +154,11 @@
  .platform-card p{margin:0; color:var(--fg-dim); font-size:.95rem; flex:1}
  .platform-card .links{display:flex; gap:1rem; align-items:center; margin-top:.5rem; font-size:.9rem}
 
+ .faq{max-width:48rem; margin:0 auto; display:flex; flex-direction:column; gap:.75rem}
+ .faq details{background:var(--card-bg); border:1px solid var(--border); border-radius:.9rem; padding:1rem 1.25rem; box-shadow:var(--card-shadow)}
+ .faq summary{cursor:pointer; font-weight:600; font-size:1.05rem}
+ .faq summary h3{display:inline; font-size:inherit; margin:0}
+ .faq details p{margin:.75rem 0 0; color:var(--fg-dim)}
  footer{padding:3rem 0; border-top:1px solid var(--border)}
  footer .wrap{display:flex; flex-direction:column; gap:1rem; align-items:center; text-align:center; color:var(--fg-dim); font-size:.9rem}
  footer .foot-links{display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center}
@@ -219,6 +269,7 @@
   <nav class="top-links">
    <a href="#platforms">Download</a>
    <a href="#compare">Compare</a>
+   <a href="#faq">FAQ</a>
    <a href="#story">About</a>
    <a href="#support">Donate</a>
    <a href="https://github.com/aerium-browser">GitHub</a>
@@ -253,6 +304,7 @@
    <circle cx="238" cy="236" r="82" fill="#4C97CF"/>
    <circle cx="222" cy="218" r="46" fill="#7FC4E4"/>
   </svg>
+  <p class="eyebrow">De-googled Android browser with Chrome extensions</p>
   <h1>A browser that stays out of the way.</h1>
   <p class="tagline">No telemetry calling home, no bundled Google services, no ad platform baked into the settings page. Built on Chromium, stripped of what doesn't belong to you.</p>
   <div class="ctas">
@@ -567,6 +619,43 @@
    <p class="hint" id="specsHint"></p>
   </div>
 
+ </div>
+</section>
+
+<section class="alt" id="faq">
+ <div class="wrap">
+  <h2 class="section-title">Questions people ask</h2>
+  <p class="section-sub">About extensions on Android, privacy, and installing the APK.</p>
+  <div class="faq">
+   <details open>
+    <summary><h3>Can I use Chrome extensions on Android?</h3></summary>
+    <p>Yes, in Aerium. Open the <a href="https://chromewebstore.google.com/">Chrome Web Store</a>, turn on <strong>Desktop site</strong> from the &#8942; menu, and install as you would on a computer. Manifest V2 extensions work too, and the Opera and Microsoft Edge add-on stores are supported. You can also load a <code>.crx</code> file from a GitHub release.</p>
+   </details>
+   <details>
+    <summary><h3>Does uBlock Origin work?</h3></summary>
+    <p>Yes. The full Manifest V2 uBlock Origin installs from the Chrome Web Store or straight from its GitHub releases, and uBlock Origin Lite works as well.</p>
+   </details>
+   <details>
+    <summary><h3>Is Aerium a Kiwi Browser alternative?</h3></summary>
+    <p>That is what it was built for. Kiwi Browser was the Android browser that ran desktop extensions, and it stopped receiving updates in January 2026. Aerium brings extensions back on a current, security-hardened Chromium base that keeps getting updates.</p>
+   </details>
+   <details>
+    <summary><h3>What does de-googled mean here?</h3></summary>
+    <p>No telemetry calling home and no bundled Google services. Safe Browsing and DRM are off until you turn them on, DuckDuckGo is the default search engine, and Global Privacy Control plus canvas and WebGL fingerprinting resistance are on out of the box.</p>
+   </details>
+   <details>
+    <summary><h3>How do I install it and keep it updated?</h3></summary>
+    <p>Download the arm64 APK from the <a href="https://github.com/aerium-browser/aerium-browser-android/releases/latest">latest release</a> and open it to install. Aerium checks for a new version once a day and tells you when one is ready. You can also add the repository to <a href="https://github.com/ImranR98/Obtainium">Obtainium</a>. An x86_64 build is available for emulators, x86 tablets and Chromebooks.</p>
+   </details>
+   <details>
+    <summary><h3>Why is the download around 300 MB?</h3></summary>
+    <p>Running extensions means building Chromium's desktop browser for Android instead of its phone build, which brings in the whole extension system and desktop UI layer. <a href="https://github.com/aerium-browser/aerium-browser-android#why-the-download-is-large">More detail in the README</a>.</p>
+   </details>
+   <details>
+    <summary><h3>Is it free and open source?</h3></summary>
+    <p>Yes. Aerium is free, has no ads, and its source is on <a href="https://github.com/aerium-browser/aerium-browser-android">GitHub</a> under the GPL-2.0 license. Every release is built in public on GitHub Actions.</p>
+   </details>
+  </div>
  </div>
 </section>
 
