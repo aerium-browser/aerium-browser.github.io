@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aerium Browser: de-googled Android browser with extensions</title>
-<meta name="description" content="Free, open-source Android browser that runs real Chrome extensions, uBlock Origin and Manifest V2 included. De-googled, no telemetry. A Kiwi Browser alternative.">
+<title>Aerium Browser: private Android browser with extensions</title>
+<meta name="description" content="Free, open-source Android browser with desktop extensions, Manifest V2 included, so uBlock Origin runs in full. No telemetry, no big tech inside.">
 <meta name="application-name" content="Aerium">
 <meta name="apple-mobile-web-app-title" content="Aerium">
-<meta name="theme-color" content="#1967d2" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#131417" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Aerium">
 <meta property="og:url" content="https://aerium-browser.github.io/">
-<meta property="og:title" content="Aerium Browser: de-googled Android browser with extensions">
-<meta property="og:description" content="Free, open-source Android browser that runs real Chrome extensions, uBlock Origin and Manifest V2 included. De-googled, no telemetry.">
+<meta property="og:title" content="Aerium Browser: private Android browser with extensions">
+<meta property="og:description" content="Desktop extensions on Android, Manifest V2 included. No telemetry, no big tech inside.">
 <meta property="og:image" content="https://aerium-browser.github.io/brand/social-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Aerium logo with the text: de-googled Android browser with real Chrome extensions, Manifest V2 included">
+<meta property="og:image:alt" content="Aerium logo with the text: private Android browser with desktop extensions, Manifest V2 included">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Aerium Browser: de-googled Android browser with extensions">
-<meta name="twitter:description" content="Free, open-source Android browser that runs real Chrome extensions, uBlock Origin and Manifest V2 included. De-googled, no telemetry.">
+<meta name="twitter:title" content="Aerium Browser: private Android browser with extensions">
+<meta name="twitter:description" content="Desktop extensions on Android, Manifest V2 included. No telemetry, no big tech inside.">
 <meta name="twitter:image" content="https://aerium-browser.github.io/brand/social-card.png">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="https://aerium-browser.github.io/">
@@ -30,6 +30,7 @@
 <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,21 +59,25 @@
       "alternateName": "Aerium Browser",
       "url": "https://aerium-browser.github.io/",
       "image": "https://aerium-browser.github.io/icon-512.png",
-      "screenshot": "https://aerium-browser.github.io/brand/social-card.png",
+      "screenshot": [
+        "https://aerium-browser.github.io/shots/new-tab.webp",
+        "https://aerium-browser.github.io/shots/extensions.webp",
+        "https://aerium-browser.github.io/shots/settings-guard.webp",
+        "https://aerium-browser.github.io/shots/settings-backup.webp"
+      ],
       "applicationCategory": "BrowserApplication",
       "operatingSystem": "Android",
       "processorRequirements": "arm64, x86_64",
-      "description": "Aerium is a free, open-source, de-googled Chromium browser for Android that installs real Chrome Web Store extensions, Manifest V2 included, with no telemetry and no Google services.",
+      "description": "Aerium is a free, open-source Android browser that runs desktop extensions, Manifest V2 included, with no telemetry and no big tech services.",
       "featureList": [
-        "Chrome Web Store, Opera and Microsoft Edge add-on stores, Manifest V2 included",
-        "uBlock Origin support",
-        "No telemetry and no bundled Google services",
-        "Android autofill for password managers such as Bitwarden",
+        "Desktop extensions, Manifest V2 included",
+        "uBlock Origin runs in full",
+        "No telemetry",
         "True black dark mode",
+        "Aerium Guard privacy, security and speed options",
+        "Backup and restore of tabs, site permissions and settings",
         "Background media playback",
-        "Per-site cookie and data clearing rules",
-        "Global Privacy Control sent by default",
-        "Canvas and WebGL fingerprinting resistance"
+        "Per-site cookie and data clearing rules"
       ],
       "isAccessibleForFree": true,
       "license": "https://github.com/aerium-browser/aerium-browser-android/blob/main/LICENSE",
@@ -89,899 +94,264 @@
 }
 </script>
 <style>
+ @font-face{font-family:"Onest"; font-style:normal; font-weight:100 900; font-display:swap; src:url(/fonts/onest-latin.woff2) format("woff2"); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+ @font-face{font-family:"Onest"; font-style:normal; font-weight:100 900; font-display:swap; src:url(/fonts/onest-latin-ext.woff2) format("woff2"); unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
  :root{
-  --bg:#ffffff; --bg-alt:#f6f8fb; --fg:#202124; --fg-dim:#5f6368; --border:#e2e5ea;
-  --accent:#1967d2; --accent-dim:#e8f0fe; --card-bg:#ffffff; --card-shadow:0 1px 2px 0 rgba(60,64,67,.15), 0 1px 3px 1px rgba(60,64,67,.1);
-  --hero-grad:linear-gradient(160deg,#eef4fd 0%,#ffffff 55%);
+  --bg:#ffffff; --fg:#111827; --dim:#5b6474; --line:#d5d9e0;
+  --navy:#1b2c5e; --on-navy:#ffffff; --on-navy-dim:#c9d3e8;
+  --panel-a:#e8eef7; --panel-b:#f1f2f4;
  }
  @media (prefers-color-scheme:dark){
   :root{
-   --bg:#131417; --bg-alt:#1a1c20; --fg:#e8eaed; --fg-dim:#9aa0a6; --border:#2c2f34;
-   --accent:#8ab4f8; --accent-dim:#1e2a3d; --card-bg:#1a1c20; --card-shadow:0 1px 2px 0 rgba(0,0,0,.4), 0 1px 3px 1px rgba(0,0,0,.3);
-   --hero-grad:linear-gradient(160deg,#182234 0%,#131417 60%);
+   --bg:#0e1116; --fg:#eef1f6; --dim:#a3abba; --line:#2a303b;
+   --navy:#22386f; --on-navy-dim:#c9d3e8;
+   --panel-a:#16202f; --panel-b:#171a20;
   }
  }
  *{box-sizing:border-box}
- body{margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--fg); line-height:1.5}
- a{color:var(--accent); text-decoration:none}
- a:hover{text-decoration:underline}
- .wrap{max-width:74rem; margin:0 auto; padding:0 1.5rem}
- code{background:rgba(128,128,128,.15); padding:.15em .45em; border-radius:.3em; font-size:.9em}
+ html{scroll-behavior:smooth}
+ body{margin:0; background:var(--bg); color:var(--fg); font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased}
+ a{color:inherit}
+ img{max-width:100%}
+ .wrap{max-width:1440px; margin:0 auto; padding:0 64px}
 
- header.top{padding:1.25rem 0}
- header.top .wrap{display:flex; align-items:center; justify-content:space-between; gap:2.5rem}
- .brand{display:flex; align-items:center; gap:.6rem; font-weight:600; font-size:1.15rem; color:inherit}
- .brand:hover{text-decoration:none; opacity:.8}
- .brand svg{flex:none}
- nav.top-links{display:flex; gap:1.5rem; font-size:.95rem}
+ header{height:80px; display:flex; align-items:center; justify-content:space-between}
+ .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-size:18px; font-weight:700}
+ nav{display:flex; align-items:center; gap:32px; font-size:15px; font-weight:500}
+ nav a{text-decoration:none}
+ nav a:not(.pill):hover{color:var(--dim)}
 
- .hero{background:var(--hero-grad); padding:4rem 0 5rem; text-align:center}
- .hero svg.logo{width:96px; height:96px; margin-bottom:1.5rem; filter:drop-shadow(0 4px 18px rgba(25,103,210,.25))}
- .hero .eyebrow{margin:0 0 .75rem; font-size:.9rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
- .hero h1{font-size:3rem; margin:0 0 .75rem; letter-spacing:-.02em}
- .hero p.tagline{font-size:1.25rem; color:var(--fg-dim); max-width:38rem; margin:0 auto 2.25rem}
- .hero .ctas{display:flex; gap:1rem; justify-content:center; flex-wrap:wrap}
- .btn{display:inline-flex; align-items:center; gap:.5em; padding:.75em 1.6em; border-radius:2em; font-weight:600; font-size:1rem; transition:transform .15s ease}
- .btn:hover{transform:translateY(-1px); text-decoration:none}
- .btn-primary{background:var(--accent); color:#fff}
- .btn-secondary{background:var(--card-bg); color:var(--fg); border:1px solid var(--border)}
+ .pill{display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 22px; border-radius:22px; background:var(--navy); color:var(--on-navy); font-weight:600; text-decoration:none; white-space:nowrap}
+ .btn{display:inline-flex; align-items:center; justify-content:center; height:56px; padding:0 30px; border-radius:28px; font-size:16px; font-weight:600; text-decoration:none; white-space:nowrap; transition:opacity .15s}
+ .btn:hover{opacity:.88}
+ .btn-primary{background:var(--navy); color:var(--on-navy)}
+ .btn-ghost{border:1px solid var(--line)}
+ .btn-light{background:#ffffff; color:#1b2c5e; height:58px; padding:0 34px; font-size:17px}
+ .ctas{display:flex; gap:12px; margin-top:36px}
 
- section{padding:4.5rem 0}
- section.alt{background:var(--bg-alt)}
- h2.section-title{font-size:2rem; text-align:center; margin:0 0 .5rem; letter-spacing:-.01em}
- p.section-sub{text-align:center; color:var(--fg-dim); max-width:36rem; margin:0 auto 3rem; font-size:1.05rem}
+ .row{display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; align-items:center; padding-top:120px}
+ .row.hero{padding-top:48px}
+ .row .text{grid-column:span 4}
+ .row.hero .text{grid-column:span 5}
+ .row .panel{grid-column:6 / span 7}
+ .row.flip .panel{grid-column:1 / span 7; grid-row:1}
+ .row.flip .text{grid-column:9 / span 4}
+ h1{margin:0; font-size:68px; font-weight:700; line-height:1.02; letter-spacing:-.035em}
+ h2{margin:0; font-size:52px; font-weight:700; line-height:1.05; letter-spacing:-.03em}
+ .lead{margin:24px 0 0; font-size:20px; color:var(--dim)}
+ .row p{margin:20px 0 0; font-size:19px; color:var(--dim)}
 
- .story{display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center}
- .story .art{display:flex; justify-content:center}
- .story .art svg{width:220px; height:220px}
- .story h2{font-size:2rem; margin:0 0 1rem; letter-spacing:-.01em}
- .story p{color:var(--fg-dim); font-size:1.05rem}
- .story p strong{color:var(--fg)}
- @media(max-width:860px){.story{grid-template-columns:1fr}}
+ .panel{height:720px; border-radius:40px; display:flex; align-items:center; justify-content:center}
+ .panel.navy{background:var(--navy)}
+ .panel.a{background:var(--panel-a)}
+ .panel.b{background:var(--panel-b)}
+ .phone{width:300px; padding:9px; border-radius:46px; background:#1c1d21; box-shadow:0 30px 60px -20px rgba(0,0,0,.35)}
+ .phone img{display:block; width:282px; height:602px; object-fit:cover; object-position:top; border-radius:38px; background:#000}
 
- .features{display:grid; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr)); gap:1.25rem}
- .card{background:var(--card-bg); border:1px solid var(--border); border-radius:.9rem; padding:1.6rem; box-shadow:var(--card-shadow)}
- .card h3{margin:0 0 .5rem; font-size:1.1rem; display:flex; align-items:center; gap:.5em}
- .badge{background:var(--accent-dim); color:var(--accent); font-size:.66rem; font-weight:600;
-  letter-spacing:.04em; text-transform:uppercase; padding:.15rem .45rem; border-radius:999px;
-  white-space:nowrap}
- .card p{margin:0; color:var(--fg-dim); font-size:.95rem}
+ .aerogel{padding-top:136px; text-align:center}
+ .aerogel h2{font-size:44px}
+ .aerogel p{margin:14px auto 0; max-width:520px; font-size:19px; color:var(--dim)}
 
- .platforms{display:grid; grid-template-columns:repeat(auto-fit,minmax(17rem,1fr)); gap:1.5rem}
- .platform-card{background:var(--card-bg); border:1px solid var(--border); border-radius:1rem; padding:2rem; box-shadow:var(--card-shadow); display:flex; flex-direction:column; gap:.9rem}
- .platform-card .icon{width:44px; height:44px}
- .platform-card h3{margin:0; font-size:1.3rem}
- .platform-card p{margin:0; color:var(--fg-dim); font-size:.95rem; flex:1}
- .platform-card .links{display:flex; gap:1rem; align-items:center; margin-top:.5rem; font-size:.9rem}
+ .get{margin-top:104px; padding:72px; border-radius:40px; background:var(--navy); color:var(--on-navy); display:flex; align-items:center; justify-content:space-between; gap:32px}
+ .get p{margin:12px 0 0; font-size:17px; color:var(--on-navy-dim)}
+ .get .links{margin-top:14px; display:flex; gap:20px; font-size:14px}
+ .get .links a{color:var(--on-navy-dim)}
+ .get .links a:hover{color:var(--on-navy)}
 
- .faq{max-width:48rem; margin:0 auto; display:flex; flex-direction:column; gap:.75rem}
- .faq details{background:var(--card-bg); border:1px solid var(--border); border-radius:.9rem; padding:1rem 1.25rem; box-shadow:var(--card-shadow)}
- .faq summary{cursor:pointer; font-weight:600; font-size:1.05rem}
- .faq summary h3{display:inline; font-size:inherit; margin:0}
- .faq details p{margin:.75rem 0 0; color:var(--fg-dim)}
- footer{padding:3rem 0; border-top:1px solid var(--border)}
- footer .wrap{display:flex; flex-direction:column; gap:1rem; align-items:center; text-align:center; color:var(--fg-dim); font-size:.9rem}
- footer .foot-links{display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center}
+ footer{padding:48px 0 40px; display:flex; justify-content:space-between; gap:24px; font-size:13px; color:var(--dim)}
+ footer nav{gap:24px; font-size:13px; font-weight:400}
+ footer nav a:hover{color:var(--fg)}
 
-
- /* Comparison table */
- .cmp-controls{display:flex; flex-wrap:wrap; gap:1rem; align-items:center; justify-content:space-between; margin:0 0 1.25rem}
- .seg{display:inline-flex; background:var(--card-bg); border:1px solid var(--border); border-radius:2em; padding:.25rem; gap:.25rem; box-shadow:var(--card-shadow)}
- .seg-btn{appearance:none; border:0; background:transparent; color:var(--fg-dim); font:inherit; font-size:.9rem; font-weight:600;
-  padding:.45em 1.05em; border-radius:2em; cursor:pointer; transition:background .15s ease, color .15s ease; white-space:nowrap}
- .seg-btn:hover{color:var(--fg)}
- .seg-btn.is-on{background:var(--accent); color:#fff}
- .seg-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
- .only-new{display:inline-flex; align-items:center; gap:.5em; font-size:.9rem; color:var(--fg-dim); cursor:pointer; user-select:none}
- .only-new input{accent-color:var(--accent); width:1rem; height:1rem; cursor:pointer}
-
- .table-scroll{overflow-x:auto; background:var(--card-bg); border:1px solid var(--border); border-radius:.9rem; box-shadow:var(--card-shadow)}
- table.cmp{width:100%; border-collapse:collapse; font-size:.95rem; min-width:36rem}
- table.cmp thead th{background:var(--card-bg); text-align:center; font-size:.8rem;
-  letter-spacing:.05em; text-transform:uppercase; color:var(--fg-dim); font-weight:700;
-  padding:.9rem .75rem; border-bottom:1px solid var(--border)}
- table.cmp thead th.fcol{text-align:left; width:52%}
- table.cmp tr.cat th{text-align:left; font-size:.78rem; letter-spacing:.07em; text-transform:uppercase;
-  color:var(--accent); font-weight:700; background:var(--accent-dim);
-  padding:.55rem .95rem; border-top:1px solid var(--border); border-bottom:1px solid var(--border)}
- table.cmp tbody tr:not(.cat):hover{background:var(--bg-alt)}
- table.cmp tbody th[scope="row"]{text-align:left; font-weight:400; padding:.8rem .95rem; vertical-align:top;
-  border-top:1px solid var(--border)}
- table.cmp td.c{text-align:center; vertical-align:top; padding:.8rem .5rem; border-top:1px solid var(--border); width:16%}
- .fname{font-weight:600; display:flex; align-items:center; gap:.5em; flex-wrap:wrap}
- .note{color:var(--fg-dim); font-size:.85rem; margin-top:.2rem; max-width:34rem}
- .badge.new{background:var(--accent); color:#fff}
-
- .mark{display:inline-block; font-size:1.05rem; line-height:1.2; font-weight:700}
- .yes .mark, .mark.yes{color:#188038}
- .part .mark, .mark.part{color:#b06000}
- .no .mark, .mark.no{color:var(--fg-dim); font-weight:400}
- .na .mark, .mark.na{color:var(--fg-dim); opacity:.45; font-weight:400}
- @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .yes .mark, :root:not([data-theme="light"]) .mark.yes{color:#7ee2a8}
-  :root:not([data-theme="light"]) .part .mark, :root:not([data-theme="light"]) .mark.part{color:#f7bd6a}
+ @media (max-width:1100px){
+  h1{font-size:56px}
+  h2{font-size:44px}
+  .panel{height:680px}
  }
- .legend{margin:1rem 0 0; text-align:center; color:var(--fg-dim); font-size:.85rem}
-
- /* Focused platform view */
- table.cmp.focused th[data-col]:not(.is-focus),
- table.cmp.focused td.c:not(.is-focus){display:none}
- table.cmp.focused{min-width:0}
- table.cmp.focused thead th.fcol{width:auto}
- table.cmp.focused td.c{width:22%}
- tr.is-hidden{display:none}
-
- /* Download cards */
- .rel-line{margin:0; font-size:.85rem; color:var(--fg-dim); line-height:1.45}
- .rel-tag{display:block; font-weight:600; color:var(--fg); font-variant-numeric:tabular-nums}
- .rel-meta{display:block}
- .rel-line .dot{opacity:.45}
- .platform-card.is-you{border-color:var(--accent); box-shadow:0 0 0 1px var(--accent), var(--card-shadow)}
- .you-badge{align-self:flex-start; background:var(--accent-dim); color:var(--accent); font-size:.66rem; font-weight:700;
-  letter-spacing:.04em; text-transform:uppercase; padding:.2rem .55rem; border-radius:999px}
- .paused-badge{align-self:flex-start; background:var(--border); color:var(--fg-dim); font-size:.66rem; font-weight:700;
-  letter-spacing:.04em; text-transform:uppercase; padding:.2rem .55rem; border-radius:999px}
- .platform-card.is-paused{opacity:.7}
- .platform-card .links{flex-wrap:wrap}
- .btn-small{padding:.55em 1.1em; font-size:.9rem}
- .specs{max-width:44rem; margin:1.75rem auto 0; background:var(--card-bg); border:1px solid var(--border);
-  border-radius:.9rem; padding:1.1rem 1.35rem; box-shadow:var(--card-shadow)}
- .specs h3{margin:0 0 .6rem; font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--fg-dim)}
- .specs dl{display:grid; grid-template-columns:repeat(auto-fit,minmax(8.5rem,1fr)); gap:.85rem 1.5rem; margin:0}
- .specs dt{font-size:.72rem; letter-spacing:.04em; text-transform:uppercase; color:var(--fg-dim)}
- .specs dd{margin:.15rem 0 0; font-weight:600; font-size:.95rem}
- .specs .hint{margin:.9rem 0 0; font-size:.85rem; color:var(--fg-dim)}
-
- @media(max-width:640px){
-  .wrap{padding:0 1.25rem}
-  nav.top-links{display:none}
-  .hero{padding:2.75rem 0 3rem}
-  .hero svg.logo{width:72px; height:72px; margin-bottom:1.1rem}
-  .hero h1{font-size:2rem}
-  .hero p.tagline{font-size:1.05rem; margin-bottom:1.75rem}
-  .hero .ctas{flex-direction:column; align-items:stretch}
-  .btn{justify-content:center}
-  section{padding:3rem 0}
-  h2.section-title{font-size:1.6rem}
-  p.section-sub{margin-bottom:2rem}
-  .story{gap:2rem}
-  .story h2{font-size:1.6rem}
-  .story .art svg{width:150px; height:150px}
-  .platform-card{padding:1.5rem}
-  .cmp-controls{justify-content:center}
-  .seg{width:100%; justify-content:space-between; overflow-x:auto}
-  .seg-btn{padding:.45em .7em; font-size:.82rem}
-  table.cmp{font-size:.9rem; min-width:30rem}
-  table.cmp thead th.fcol{width:44%}
-  .note{font-size:.8rem}
-  .specs dl{grid-template-columns:repeat(auto-fit,minmax(7.5rem,1fr))}
+ @media (max-width:900px){
+  .wrap{padding:0 24px}
+  header{height:60px}
+  nav a:not(.pill){display:none}
+  .row, .row.flip{display:flex; flex-direction:column; align-items:stretch; padding-top:64px}
+  .row.hero{padding-top:32px}
+  .row .panel, .row.flip .panel{margin:28px -8px 0; height:680px; border-radius:32px}
+  .row.flip .text{order:-1}
+  h1{font-size:40px; line-height:1.05}
+  h2{font-size:32px}
+  .lead, .row p{font-size:17px; margin-top:14px}
+  .ctas{flex-direction:column; margin-top:28px}
+  .btn{height:52px}
+  .aerogel{padding-top:64px; text-align:left}
+  .aerogel h2{font-size:32px}
+  .aerogel p{margin-left:0; font-size:17px}
+  .get{margin:56px -8px 0; padding:40px 24px; border-radius:28px; flex-direction:column; align-items:stretch}
+  .get h2{font-size:30px}
+  .get p{font-size:15px}
+  .btn-light{height:52px}
+  footer{flex-direction:column-reverse; padding:32px 0}
  }
 </style>
 </head>
 <body>
+<div class="wrap">
 
-<header class="top">
- <div class="wrap">
-  <a class="brand" href="/">
-   <svg width="26" height="26" viewBox="0 0 512 512"><path d="M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z" fill="#1B2C5E"/><path d="M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z" fill="#2A4485"/><path d="M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z" fill="#111C42"/><circle cx="256" cy="256" r="134" fill="#E9F1FB"/><circle cx="256" cy="256" r="104" fill="#2C6BAE"/><circle cx="238" cy="236" r="82" fill="#4C97CF"/><circle cx="222" cy="218" r="46" fill="#7FC4E4"/></svg>
-   Aerium
-  </a>
-  <nav class="top-links">
-   <a href="#platforms">Download</a>
-   <a href="#compare">Compare</a>
-   <a href="#faq">FAQ</a>
-   <a href="#story">About</a>
-   <a href="#support">Donate</a>
-   <a href="https://github.com/aerium-browser">GitHub</a>
-  </nav>
- </div>
+<header>
+ <a class="brand" href="/">
+  <svg width="28" height="28" viewBox="0 0 512 512" aria-hidden="true"><path d="M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z" fill="#1B2C5E"/><path d="M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z" fill="#2A4485"/><path d="M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z" fill="#111C42"/><circle cx="256" cy="256" r="134" fill="#E9F1FB"/><circle cx="256" cy="256" r="104" fill="#2C6BAE"/><circle cx="238" cy="236" r="82" fill="#4C97CF"/><circle cx="222" cy="218" r="46" fill="#7FC4E4"/></svg>
+  Aerium
+ </a>
+ <nav>
+  <a href="#extensions">Extensions</a>
+  <a href="#privacy">Privacy</a>
+  <a href="https://github.com/aerium-browser/aerium-browser-android">Source code</a>
+  <a class="pill" href="#download">Download</a>
+ </nav>
 </header>
 
-<section class="hero">
- <div class="wrap">
-  <svg class="logo" viewBox="0 0 512 512" role="img" aria-label="Aerium logo">
-   <path d="M 330 384.17 L 149.1 488.61 A 256 256 0 0 1 108 47.12 L 108 256 A 148 148 0 0 0 330 384.17 Z" fill="#1B2C5E"/>
-   <path d="M 108 256 L 108 47.12 A 256 256 0 0 1 510.9 232.27 L 330 127.83 A 148 148 0 0 0 108 256 Z" fill="#2A4485"/>
-   <path d="M 330 127.83 L 510.9 232.27 A 256 256 0 0 1 149.1 488.61 L 330 384.17 A 148 148 0 0 0 330 127.83 Z" fill="#111C42"/>
-   <circle cx="388" cy="96" r="5" fill="#FFFFFF" opacity="0.95"/>
-   <circle cx="318" cy="60" r="3" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="430" cy="178" r="3.5" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="368" cy="140" r="2.5" fill="#FFFFFF" opacity="0.95"/>
-   <circle cx="96" cy="132" r="4" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="60" cy="210" r="3" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="140" cy="78" r="3" fill="#FFFFFF" opacity="0.95"/>
-   <circle cx="104" cy="92" r="2.5" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="150" cy="400" r="4.5" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="92" cy="340" r="3" fill="#FFFFFF" opacity="0.95"/>
-   <circle cx="212" cy="442" r="3" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="252" cy="416" r="2.5" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="402" cy="360" r="4" fill="#FFFFFF" opacity="0.95"/>
-   <circle cx="356" cy="420" r="3" fill="#FFFFFF" opacity="0.55"/>
-   <circle cx="438" cy="296" r="2.5" fill="#FFFFFF" opacity="0.55"/>
-   <path d="M 196 79 Q 198.34 89.66 209 92 Q 198.34 94.34 196 105 Q 193.66 94.34 183 92 Q 193.66 89.66 196 79 Z" fill="#FFFFFF" opacity="0.9"/>
-   <circle cx="256" cy="256" r="134" fill="#E9F1FB"/>
-   <circle cx="256" cy="256" r="104" fill="#2C6BAE"/>
-   <circle cx="238" cy="236" r="82" fill="#4C97CF"/>
-   <circle cx="222" cy="218" r="46" fill="#7FC4E4"/>
-  </svg>
-  <p class="eyebrow">De-googled Android browser with Chrome extensions</p>
-  <h1>A browser that stays out of the way.</h1>
-  <p class="tagline">No telemetry calling home, no bundled Google services, no ad platform baked into the settings page. Built on Chromium, stripped of what doesn't belong to you.</p>
+<main>
+<section class="row hero">
+ <div class="text">
+  <h1>The browser that stays out of the way.</h1>
+  <p class="lead">Desktop extensions on Android. No big tech inside.</p>
   <div class="ctas">
-   <a class="btn btn-primary" href="#platforms">Get Aerium</a>
-   <a class="btn btn-secondary" href="https://github.com/aerium-browser">View source</a>
+   <a class="btn btn-primary dl" href="https://github.com/aerium-browser/aerium-browser-android/releases/latest">Download for Android</a>
+   <a class="btn btn-ghost" href="https://github.com/aerium-browser/aerium-browser-android">View source</a>
   </div>
+ </div>
+ <div class="panel navy">
+  <div class="phone"><img src="/shots/new-tab.webp" width="282" height="602" alt="Aerium new tab page in true black, with the address bar, extensions, tabs and menu buttons"></div>
  </div>
 </section>
 
-<section class="alt" id="support">
- <div class="wrap">
-  <h2 class="section-title">Support Aerium</h2>
-  <p class="section-sub">Aerium runs on donations and spare time: no ads, no data sales.</p>
-  <div class="platform-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.25rem; margin-top:1.5rem">
-   <div class="card">
-    <h3>Monero (XMR)</h3>
-    <p style="margin-bottom:1rem">Scan or tap to open your wallet.</p>
-    <a class="btn btn-primary btn-small" href="https://aerium-browser.github.io/donate/xmr">Donate XMR</a>
-   </div>
-   <div class="card">
-    <h3>Litecoin (LTC)</h3>
-    <p style="margin-bottom:1rem">Scan or tap to open your wallet.</p>
-    <a class="btn btn-primary btn-small" href="https://aerium-browser.github.io/donate/ltc">Donate LTC</a>
-   </div>
-  </div>
+<section class="row flip" id="extensions">
+ <div class="panel a">
+  <div class="phone"><img src="/shots/extensions.webp" width="282" height="602" loading="lazy" alt="Aerium extensions menu showing uBlock Origin and floccus bookmarks sync"></div>
+ </div>
+ <div class="text">
+  <h2>Extensions, finally.</h2>
+  <p>uBlock Origin, floccus and other open-source extensions. Manifest V2 included.</p>
  </div>
 </section>
 
-<section id="story">
- <div class="wrap story">
-  <div class="art">
-   <svg viewBox="0 0 200 200" role="img" aria-label="Aerogel block illustration">
-    <defs>
-     <radialGradient id="aerogelGrad" cx="35%" cy="30%" r="80%">
-      <stop offset="0%" stop-color="#bcdcfb" stop-opacity=".9"/>
-      <stop offset="60%" stop-color="#6fa8dc" stop-opacity=".55"/>
-      <stop offset="100%" stop-color="#3d6fa8" stop-opacity=".35"/>
-     </radialGradient>
-    </defs>
-    <rect x="30" y="30" width="140" height="140" rx="18" fill="url(#aerogelGrad)" stroke="#1967d2" stroke-width="2" stroke-opacity=".4"/>
-    <circle cx="70" cy="70" r="3" fill="#fff" opacity=".8"/>
-    <circle cx="130" cy="55" r="2" fill="#fff" opacity=".6"/>
-    <circle cx="150" cy="110" r="2.5" fill="#fff" opacity=".7"/>
-    <circle cx="60" cy="130" r="2" fill="#fff" opacity=".6"/>
-    <circle cx="110" cy="140" r="3" fill="#fff" opacity=".8"/>
-    <circle cx="95" cy="95" r="2" fill="#fff" opacity=".5"/>
-   </svg>
-  </div>
-  <div>
-   <h2>Named after the lightest solid there is.</h2>
-   <p><strong>Aerium</strong> takes its name from <strong>aerogel</strong>, a material that is up to 99% air by volume, solid enough to hold its shape, light enough to rest on a flower without bending the stem. That is the standard the browser is held to: strip away the weight that does not need to be there, keep what actually works.</p>
-   <p>Built by <strong>Dioide</strong> on top of Chromium, using <a href="https://github.com/ungoogled-software/ungoogled-chromium">ungoogled-chromium</a> on Windows and Linux, and a Vanadium-based fork on Android, with a curated set of privacy defaults and a browser identity of its own, not a reskin.</p>
-  </div>
+<section class="row" id="privacy">
+ <div class="text">
+  <h2>Private by default.</h2>
+  <p>No telemetry, no big tech services. Aerium Guard sets privacy, security and speed in one place.</p>
+ </div>
+ <div class="panel b">
+  <div class="phone"><img src="/shots/settings-guard.webp" width="282" height="602" loading="lazy" alt="Aerium settings with Aerium Guard, privacy and security, and site settings"></div>
  </div>
 </section>
 
-<section class="alt" id="compare">
- <div class="wrap">
-  <h2 class="section-title">What you get, platform by platform</h2>
-  <p class="section-sub">The same principles everywhere, adapted to what each platform actually supports. Pick a platform to see only what it has.</p>
-
-  <div class="cmp-controls">
-   <div class="seg" role="tablist" aria-label="Filter by platform">
-    <button class="seg-btn is-on" role="tab" aria-selected="true" data-plat="all">All platforms</button>
-    <button class="seg-btn" role="tab" aria-selected="false" data-plat="win">Windows</button>
-    <button class="seg-btn" role="tab" aria-selected="false" data-plat="linux">Linux</button>
-    <button class="seg-btn" role="tab" aria-selected="false" data-plat="android">Android</button>
-   </div>
-   <label class="only-new"><input type="checkbox" id="onlyNew"> Only what is new</label>
-  </div>
-
-  <div class="table-scroll">
-   <table class="cmp" id="cmpTable">
-    <thead>
-     <tr>
-      <th scope="col" class="fcol">Feature</th>
-      <th scope="col" data-col="win">Windows</th>
-      <th scope="col" data-col="linux">Linux</th>
-      <th scope="col" data-col="android">Android</th>
-     </tr>
-    </thead>
-    <tbody>
-    <tr class="cat"><th colspan="4" scope="colgroup">Privacy defaults</th></tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">Aerogel tabs <span class="badge new">New</span></div><div class="note">A tab with a cookie jar of its own, from the app menu or a link. Never written to disk, emptied when the tab closes. Separates identity, not traces.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">HTTPS-First Balanced Mode on by default</div><div class="note">Upgrades navigations without the disruptive full-site warnings of strict HTTPS-only.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Global Privacy Control on every request</div><div class="note">Sec-GPC and navigator.globalPrivacyControl, recognised under CCPA, still missing from stock Chromium.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Fingerprinting noise: canvas, clientRects, measureText, WebGL</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Safe Browsing off by default</div><div class="note">No URL stream to a third party.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Payment probing off by default</div><div class="note">Sites cannot silently ask whether you can pay.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Preloading, optimization guide and domain reliability off</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">No password or payment vault in the browser</div><div class="note">The settings are removed, not merely emptied. Your system autofill service fills forms.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">No sync service, and no plans for one</div><div class="note">Bookmarks sync through floccus over storage you own.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr class="cat"><th colspan="4" scope="colgroup">Search</th></tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">Secure DNS menu rebuilt <span class="badge new">New</span></div><div class="note">Mullvad and Mullvad ad-blocking added, Quad9 and NextDNS unhidden, Google Public DNS removed.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">DuckDuckGo as the default engine</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">Nine privacy-first engines to choose from <span class="badge new">New</span></div><div class="note">DuckDuckGo, Startpage, Brave Search, Mojeek, Qwant, Ecosia, degoog and two DuckDuckGo no-JS variants.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr class="cat"><th colspan="4" scope="colgroup">Data and cleanup</th></tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Delete browsing data when the browser closes</div><div class="note">Choose which kinds go.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Keep list: sites worth staying signed into</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Reset a site the moment its last tab closes</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Keep until the browser closes, then clear</div><div class="note">A middle setting between keep and reset.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Clear every site on tab close, with exceptions</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Delay before clearing</div><div class="note">So a reopened tab does not lose its session.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr class="cat"><th colspan="4" scope="colgroup">Extensions</th></tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Extensions at all</div><div class="note">Including on Android, which most Android browsers still cannot do.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">Manifest V2 extensions keep working <span class="badge new">New</span></div><div class="note">Content blockers that have nowhere else to go still run.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">An extension can own the New Tab page</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Web store bundled with the package</div><div class="note">Android points at the Chrome, Opera and Edge stores instead of bundling one.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c part" data-v="p"><span class="mark" aria-label="partial">&#9679;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Install a .crx from an allowed off-store host</div><div class="note">GitHub, Opera and Edge add-on hosts included.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">The web store opens in its desktop layout <span class="badge new">New</span></div><div class="note">The install button only exists on the desktop pages, so Android asks for them.</div></th>
-     <td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td><td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr class="cat"><th colspan="4" scope="colgroup">Media</th></tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">DRM off until you turn it on, in Settings <span class="badge new">New</span></div><div class="note">Widevine is not registered unless asked for, so no site can probe for it.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">Background playback, as a switch <span class="badge new">New</span></div><div class="note">Audio and video carry on when you switch away or blank the screen.</div></th>
-     <td class="c na" data-v="na"><span class="mark" aria-label="not applicable">&#183;</span></td><td class="c na" data-v="na"><span class="mark" aria-label="not applicable">&#183;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Hand a download to another app</div></th>
-     <td class="c na" data-v="na"><span class="mark" aria-label="not applicable">&#183;</span></td><td class="c na" data-v="na"><span class="mark" aria-label="not applicable">&#183;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr class="cat"><th colspan="4" scope="colgroup">Appearance</th></tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Aerium's own palette, not the platform's</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Pure black surfaces for OLED</div><div class="note">A black OLED pixel is switched off and draws no power. A desktop monitor gains nothing.</div></th>
-     <td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td><td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Darken web content, as a setting</div></th>
-     <td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td><td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Blacken sites that ship their own dark theme</div><div class="note">Their dark grey becomes true black too.</div></th>
-     <td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td><td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">Bottom bar, new tab button within thumb reach <span class="badge new">New</span></div><div class="note">The tab switcher's plus moves to the bottom, where one hand can reach it.</div></th>
-     <td class="c na" data-v="na"><span class="mark" aria-label="not applicable">&#183;</span></td><td class="c na" data-v="na"><span class="mark" aria-label="not applicable">&#183;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr class="cat"><th colspan="4" scope="colgroup">Identity and updates</th></tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">chrome://aerium lists every patch by name</div><div class="note">What was changed to make this browser is something you can read.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">aerium:// as an alias for every internal page</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="1">
-     <th scope="row"><div class="fname">Share Aerium row on the About page <span class="badge new">New</span></div><div class="note">Android opens the system share sheet; desktop copies a pitch and the download link to the clipboard instead, since there's no share-target API there.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Daily release check, result on the About screen</div><div class="note">One request a day, to GitHub, and nothing else.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Told about a release without opening Settings</div><div class="note">An app-menu row on desktop, a notification on Android.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">View page source in the menu</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">A download's source URL is recoverable</div><div class="note">Android shows and copies it in one tap; desktop hides it behind the filename link.</div></th>
-     <td class="c part" data-v="p"><span class="mark" aria-label="partial">&#9679;</span></td><td class="c part" data-v="p"><span class="mark" aria-label="partial">&#9679;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr class="cat"><th colspan="4" scope="colgroup">Onboarding</th></tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">First-run preset chooser</div><div class="note">Desktop ships with Chromium's defaults and needs a way off them. The Android build already is the decided set.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">Aerium Guard: Recommended, Privacy, Performance</div><div class="note">Named sets of defaults rather than a page of switches, with a shield saying which is in force.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c no" data-v="n"><span class="mark" aria-label="no">&#8211;</span></td>
-    </tr>
-    <tr class="cat"><th colspan="4" scope="colgroup">Builds</th></tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">arm64</div></th>
-     <td class="c na" data-v="na"><span class="mark" aria-label="not applicable">&#183;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td>
-    </tr>
-    <tr data-new="0">
-     <th scope="row"><div class="fname">x86_64</div><div class="note">Android x86_64 is a prerelease, built on request.</div></th>
-     <td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c yes" data-v="y"><span class="mark" aria-label="yes">&#10003;</span></td><td class="c part" data-v="p"><span class="mark" aria-label="partial">&#9679;</span></td>
-    </tr>
-    </tbody>
-   </table>
-  </div>
-  <p class="legend"><span class="rel-meta">Windows and Linux columns describe the last desktop builds; those platforms are paused.</span><br><span class="mark yes">&#10003;</span> shipped &nbsp; <span class="mark part">&#9679;</span> partial &nbsp; <span class="mark no">&#8211;</span> not present &nbsp; <span class="mark na">&#183;</span> not applicable on this platform</p>
+<section class="row flip">
+ <div class="panel a">
+  <div class="phone"><img src="/shots/settings-backup.webp" width="282" height="602" loading="lazy" alt="Aerium settings with backup and restore"></div>
+ </div>
+ <div class="text">
+  <h2>Take it with you.</h2>
+  <p>Back up your open tabs, site permissions and settings, and bring them back on any phone.</p>
  </div>
 </section>
 
-<section id="platforms">
- <div class="wrap">
-  <h2 class="section-title">Available now</h2>
-  <p class="section-sub">Free, open source, built in public on GitHub Actions. The Android release below is fetched live from the release feed. Desktop builds are paused.</p>
-  <div class="platforms">
-
-   <div class="platform-card is-paused" data-os="windows">
-    <svg class="icon" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 12.4L36 7.5V42H0V12.4Z" fill="#1967d2"/><path d="M40 7V42H88V0L40 7Z" fill="#1967d2" opacity=".7"/><path d="M0 46H36V80.6L0 75.6V46Z" fill="#1967d2" opacity=".7"/><path d="M40 46H88V88L40 81V46Z" fill="#1967d2"/></svg>
-    <span class="paused-badge">Paused</span>
-    <h3>Windows</h3>
-    <p>Built on ungoogled-chromium. Standard installer, same shortcuts and Start Menu integration you already know.</p>
-    <p class="rel-line"><span class="rel-meta">Development is paused while Aerium focuses on Android. The repository and its builds have been retired for now.</span></p>
-   </div>
-
-   <div class="platform-card is-paused" data-os="linux">
-    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C9 2 7 5 7 8.5c0 1.5.5 2.5 1 3.5-2 1-4 3.5-4 6.5 0 2.5 3.5 3.5 8 3.5s8-1 8-3.5c0-3-2-5.5-4-6.5.5-1 1-2 1-3.5C17 5 15 2 12 2Z" fill="#1967d2"/><circle cx="9.5" cy="9" r="1.2" fill="#fff"/><circle cx="14.5" cy="9" r="1.2" fill="#fff"/></svg>
-    <span class="paused-badge">Paused</span>
-    <h3>Linux</h3>
-    <p>Portable AppImage for x86_64 and arm64, no installation needed. Self-updates in place via zsync. Built with ungoogled-chromium-portablelinux.</p>
-    <p class="rel-line"><span class="rel-meta">Development is paused while Aerium focuses on Android. The repository and its builds have been retired for now.</span></p>
-   </div>
-
-   <div class="platform-card" data-os="android">
-    <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="2" width="12" height="20" rx="2.5" fill="#1967d2"/><rect x="8.5" y="4.5" width="7" height="13" fill="#fff" opacity=".25"/><circle cx="12" cy="19" r="1" fill="#fff"/></svg>
-    <span class="you-badge" hidden>Your device</span>
-    <h3>Android</h3>
-    <p>Forked from a Vanadium-based build. Full extension support including Manifest V2, something most Android browsers still cannot do. Kiwi Browser used to be the answer to that and stopped receiving updates in January 2026; this picks up where it left off, on a security-hardened Chromium base. The download is large, around 300 MB, because extensions mean shipping Chromium's desktop build. <a href="https://github.com/aerium-browser/aerium-browser-android#why-the-download-is-large">Here is why</a>.</p>
-    <p class="rel-line" data-rel="android"><span class="rel-meta">Loading latest release</span></p>
-    <div class="links">
-     <a class="btn btn-primary btn-small" href="https://github.com/aerium-browser/aerium-browser-android/releases/latest">Download</a>
-     <a class="btn btn-secondary btn-small" href="https://github.com/aerium-browser/aerium-browser-android/blob/main/CHANGELOG.md">Changelog</a>
-     <a href="https://github.com/aerium-browser/aerium-browser-android">Source</a>
-     <a id="x64Link" href="https://github.com/aerium-browser/aerium-browser-android/releases" hidden>x86_64 build (emulators, x86 tablets)</a>
-    </div>
-   </div>
-
-  </div>
-
-  <div class="specs" id="specs" hidden>
-   <h3>What we detected about your device</h3>
-   <dl id="specsList"></dl>
-   <p class="hint" id="specsHint"></p>
-  </div>
-
- </div>
+<section class="aerogel" id="story">
+ <h2>Named after aerogel.</h2>
+ <p>The lightest solid there is, up to 99% air. Aerium keeps only what matters.</p>
 </section>
 
-<section class="alt" id="faq">
- <div class="wrap">
-  <h2 class="section-title">Questions people ask</h2>
-  <p class="section-sub">About extensions on Android, privacy, and installing the APK.</p>
-  <div class="faq">
-   <details open>
-    <summary><h3>Can I use Chrome extensions on Android?</h3></summary>
-    <p>Yes, in Aerium. Open the <a href="https://chromewebstore.google.com/">Chrome Web Store</a>, turn on <strong>Desktop site</strong> from the &#8942; menu, and install as you would on a computer. Manifest V2 extensions work too, and the Opera and Microsoft Edge add-on stores are supported. You can also load a <code>.crx</code> file from a GitHub release.</p>
-   </details>
-   <details>
-    <summary><h3>Does uBlock Origin work?</h3></summary>
-    <p>Yes. The full Manifest V2 uBlock Origin installs from the Chrome Web Store or straight from its GitHub releases, and uBlock Origin Lite works as well.</p>
-   </details>
-   <details>
-    <summary><h3>Is Aerium a Kiwi Browser alternative?</h3></summary>
-    <p>That is what it was built for. Kiwi Browser was the Android browser that ran desktop extensions, and it stopped receiving updates in January 2026. Aerium brings extensions back on a current, security-hardened Chromium base that keeps getting updates.</p>
-   </details>
-   <details>
-    <summary><h3>What does de-googled mean here?</h3></summary>
-    <p>No telemetry calling home and no bundled Google services. Safe Browsing and DRM are off until you turn them on, DuckDuckGo is the default search engine, and Global Privacy Control plus canvas and WebGL fingerprinting resistance are on out of the box.</p>
-   </details>
-   <details>
-    <summary><h3>How do I install it and keep it updated?</h3></summary>
-    <p>Download the arm64 APK from the <a href="https://github.com/aerium-browser/aerium-browser-android/releases/latest">latest release</a> and open it to install. Aerium checks for a new version once a day and tells you when one is ready. You can also add the repository to <a href="https://github.com/ImranR98/Obtainium">Obtainium</a>. An x86_64 build is available for emulators, x86 tablets and Chromebooks.</p>
-   </details>
-   <details>
-    <summary><h3>Why is the download around 300 MB?</h3></summary>
-    <p>Running extensions means building Chromium's desktop browser for Android instead of its phone build, which brings in the whole extension system and desktop UI layer. <a href="https://github.com/aerium-browser/aerium-browser-android#why-the-download-is-large">More detail in the README</a>.</p>
-   </details>
-   <details>
-    <summary><h3>Is it free and open source?</h3></summary>
-    <p>Yes. Aerium is free, has no ads, and its source is on <a href="https://github.com/aerium-browser/aerium-browser-android">GitHub</a> under the GPL-2.0 license. Every release is built in public on GitHub Actions.</p>
-   </details>
+<section class="get" id="download">
+ <div>
+  <h2>Get Aerium for Android</h2>
+  <p id="relLine">Free and open source · arm64 · about 300&nbsp;MB</p>
+  <div class="links">
+   <a id="changelogLink" href="https://github.com/aerium-browser/aerium-browser-android/blob/main/CHANGELOG.md">Changelog</a>
+   <a href="https://github.com/aerium-browser/aerium-browser-android/releases">All releases</a>
+   <a id="x64Link" href="https://github.com/aerium-browser/aerium-browser-android/releases" hidden>x86_64 build</a>
   </div>
  </div>
+ <a class="btn btn-light dl" href="https://github.com/aerium-browser/aerium-browser-android/releases/latest">Download APK</a>
 </section>
+</main>
 
 <footer>
- <div class="wrap">
-  <div class="foot-links">
-   <a href="https://github.com/aerium-browser/aerium-browser-android">Android</a>
-   <a href="https://github.com/ungoogled-software/ungoogled-chromium">ungoogled-chromium</a>
-  </div>
-  <p>Aerium is an independent project by Dioide, built on the open-source Chromium project. Not affiliated with or endorsed by Google.</p>
- </div>
+ <span>Aerium by Dioide. Free and open source under GPL-2.0.</span>
+ <nav>
+  <a href="https://aerium-browser.github.io/donate/xmr">Donate XMR</a>
+  <a href="https://aerium-browser.github.io/donate/ltc">Donate LTC</a>
+  <a href="https://github.com/aerium-browser/aerium-browser-android">Source code</a>
+ </nav>
 </footer>
 
+</div>
 <script>
 (function () {
   "use strict";
-
-  /* ---------- what are we running on ---------- */
-  var ua = navigator.userAgent || "";
-  var uad = navigator.userAgentData || null;
-
-  function guessOs() {
-    var p = (uad && uad.platform) || navigator.platform || "";
-    if (/Android/i.test(ua) || /Android/i.test(p)) return "android";
-    if (/Windows/i.test(ua) || /Win/i.test(p)) return "windows";
-    if (/Linux|X11|CrOS/i.test(ua) || /Linux/i.test(p)) return "linux";
-    return null;
-  }
-
-  function uaArch() {
-    if (/aarch64|arm64|armv8/i.test(ua)) return "arm64";
-    if (/armv7|armeabi|\barm\b/i.test(ua)) return "arm32";
-    if (/x86_64|Win64|WOW64|amd64|\bx64\b/i.test(ua)) return "x86_64";
-    return null;
-  }
-
-  var myOs = guessOs();
-
-  /* One shared lookup: everything below waits on it. */
-  var deviceInfo = (uad && uad.getHighEntropyValues
-    ? uad.getHighEntropyValues(["architecture", "bitness", "platform", "platformVersion", "model"])
-        .catch(function () { return {}; })
-    : Promise.resolve({})
-  ).then(function (hi) {
-    hi = hi || {};
-    var arch = null;
-    if (hi.architecture === "arm") arch = hi.bitness === "64" ? "arm64" : "arm32";
-    else if (hi.architecture === "x86") arch = hi.bitness === "64" ? "x86_64" : "x86";
-    else if (hi.architecture) arch = hi.architecture;
-    hi.arch = arch || uaArch();
-    return hi;
-  });
-
-  if (myOs) {
-    var mine = document.querySelector('.platform-card[data-os="' + myOs + '"]');
-    if (mine) {
-      mine.classList.add("is-you");
-      var badge = mine.querySelector(".you-badge");
-      if (badge) badge.hidden = false;
-    }
-  }
-
-  /* ---------- comparison table ---------- */
-  var table = document.getElementById("cmpTable");
-  if (table) {
-    var buttons = Array.prototype.slice.call(document.querySelectorAll(".seg-btn"));
-    var onlyNew = document.getElementById("onlyNew");
-    var plat = "all";
-
-    function applyPlatform() {
-      var focused = plat !== "all";
-      table.classList.toggle("focused", focused);
-      var cells = table.querySelectorAll("th[data-col], td.c");
-      for (var i = 0; i < cells.length; i++) {
-        var cell = cells[i];
-        var col = cell.getAttribute("data-col");
-        if (!col) {
-          /* body cells carry no data-col, so map by their index in the row */
-          var idx = cell.cellIndex;
-          col = ["", "win", "linux", "android"][idx] || "";
-        }
-        cell.classList.toggle("is-focus", !focused || col === plat);
-      }
-    }
-
-    function applyRows() {
-      var wantNew = onlyNew && onlyNew.checked;
-      var rows = table.tBodies[0].rows;
-      var lastCat = null;
-      var catHasVisible = false;
-      for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        if (row.classList.contains("cat")) {
-          if (lastCat) lastCat.classList.toggle("is-hidden", !catHasVisible);
-          lastCat = row;
-          catHasVisible = false;
-          continue;
-        }
-        var hide = false;
-        if (wantNew && row.getAttribute("data-new") !== "1") hide = true;
-        if (!hide && plat !== "all") {
-          var cell = row.querySelector('td.c.is-focus');
-          if (cell && cell.getAttribute("data-v") === "na") hide = true;
-        }
-        row.classList.toggle("is-hidden", hide);
-        if (!hide) catHasVisible = true;
-      }
-      if (lastCat) lastCat.classList.toggle("is-hidden", !catHasVisible);
-    }
-
-    function refresh() { applyPlatform(); applyRows(); }
-
-    buttons.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        plat = btn.getAttribute("data-plat");
-        buttons.forEach(function (b) {
-          var on = b === btn;
-          b.classList.toggle("is-on", on);
-          b.setAttribute("aria-selected", on ? "true" : "false");
-        });
-        refresh();
-      });
-    });
-    if (onlyNew) onlyNew.addEventListener("change", refresh);
-
-    /* On a phone the three columns do not fit side by side, so there is nothing
-       to compare. Open on the platform the visitor is holding. */
-    var narrow = window.matchMedia && window.matchMedia("(max-width: 640px)").matches;
-    var startTab = { windows: "win", linux: "linux", android: "android" }[myOs];
-    if (narrow && startTab) {
-      var startBtn = document.querySelector('.seg-btn[data-plat="' + startTab + '"]');
-      if (startBtn) startBtn.click();
-    }
-    refresh();
-  }
-
-  /* ---------- latest releases ---------- */
-  var REPOS = {
-    android: "aerium-browser-android"
-  };
-
-  /* What each platform actually publishes, most-wanted first. The visitor's own
-     architecture is tried before the default when we managed to detect it. */
-  function pickAsset(os, assets, arch) {
-    var wanted = [];
-    if (os === "windows") {
-      wanted = [/installer_x64\.exe$/i, /\.exe$/i, /windows_x64\.zip$/i];
-    } else if (os === "linux") {
-      wanted = arch === "arm64"
-        ? [/arm64\.AppImage$/i, /x86_64\.AppImage$/i]
-        : [/x86_64\.AppImage$/i, /arm64\.AppImage$/i];
-    } else {
-      wanted = arch === "x86_64"
-        ? [/x86_64\.apk$/i, /arm64-v8a\.apk$/i, /\.apk$/i]
-        : [/arm64-v8a\.apk$/i, /\.apk$/i];
-    }
-    for (var i = 0; i < wanted.length; i++) {
-      for (var j = 0; j < assets.length; j++) {
-        if (wanted[i].test(assets[j].name)) return assets[j];
-      }
-    }
-    return null;
-  }
+  var API = "https://api.github.com/repos/aerium-browser/aerium-browser-android/releases";
+  var HEADERS = { headers: { Accept: "application/vnd.github+json" } };
 
   function human(bytes) {
-    if (!bytes) return "";
     var mb = bytes / (1024 * 1024);
-    return mb >= 1024 ? (mb / 1024).toFixed(1) + " GB" : Math.round(mb) + " MB";
+    return mb >= 1024 ? (mb / 1024).toFixed(1) + "\u00a0GB" : Math.round(mb) + "\u00a0MB";
   }
 
-  function clean(text) {
-    return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;");
-  }
-
-  function fillRelease(os, data, arch) {
-    var line = document.querySelector('.rel-line[data-rel="' + os + '"]');
-    if (!line || !data || !data.tag_name) return;
-    var card = line.closest(".platform-card");
-    var asset = pickAsset(os, data.assets || [], arch);
-    var date = data.published_at ? new Date(data.published_at) : null;
-
-    var meta = [];
-    if (date) {
-      meta.push(date.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }));
-    }
-    if (asset && asset.size) meta.push(human(asset.size));
-    line.innerHTML = '<span class="rel-tag">' + clean(data.tag_name) + "</span>" +
-      (meta.length ? '<span class="rel-meta">' + meta.join(' <span class="dot">&bull;</span> ') + "</span>" : "");
-
-    /* Link straight to the file only on the card that matches this visitor.
-       On the others we cannot know which architecture they want. */
-    if (asset && asset.browser_download_url && os === myOs) {
-      var dl = card && card.querySelector("a.btn-primary");
-      if (dl) dl.setAttribute("href", asset.browser_download_url);
-    }
-    var changelog = card && card.querySelector('a[href*="CHANGELOG"]');
-    if (changelog && data.html_url) changelog.setAttribute("href", data.html_url);
-  }
-
-  deviceInfo.then(function (hi) {
-    Object.keys(REPOS).forEach(function (os) {
-      var key = "aerium.rel." + os;
-      var cached = null;
-      try { cached = JSON.parse(sessionStorage.getItem(key) || "null"); } catch (e) {}
-      if (cached) { fillRelease(os, cached, hi.arch); return; }
-      fetch("https://api.github.com/repos/aerium-browser/" + REPOS[os] + "/releases/latest",
-            { headers: { Accept: "application/vnd.github+json" } })
-        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-        .then(function (data) {
-          try {
-            sessionStorage.setItem(key, JSON.stringify({
-              tag_name: data.tag_name,
-              published_at: data.published_at,
-              html_url: data.html_url,
-              assets: (data.assets || []).map(function (a) {
-                return { name: a.name, size: a.size, browser_download_url: a.browser_download_url };
-              })
-            }));
-          } catch (e) {}
-          fillRelease(os, data, hi.arch);
-        })
-        .catch(function () {
-          var line = document.querySelector('.rel-line[data-rel="' + os + '"]');
-          if (line) line.innerHTML = '<span class="rel-meta">See the releases page</span>';
-        });
+  function fill(data) {
+    if (!data || !data.tag_name) return;
+    var apk = null;
+    (data.assets || []).forEach(function (a) {
+      if (!apk && /arm64-v8a\.apk$/i.test(a.name)) apk = a;
     });
-  });
+    (data.assets || []).forEach(function (a) {
+      if (!apk && /\.apk$/i.test(a.name)) apk = a;
+    });
+    var parts = [data.tag_name];
+    if (data.published_at) {
+      parts.push(new Date(data.published_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }));
+    }
+    parts.push("arm64");
+    if (apk && apk.size) parts.push(human(apk.size));
+    document.getElementById("relLine").textContent = parts.join(" · ");
+    if (apk && apk.browser_download_url) {
+      document.querySelectorAll("a.dl").forEach(function (a) { a.href = apk.browser_download_url; });
+    }
+    if (data.html_url) document.getElementById("changelogLink").href = data.html_url;
+  }
 
-  /* ---------- Android x86_64 prerelease ----------
-     Deliberately its own fetch: the x86_64 build is published as a GitHub
-     "prerelease" (see build-x64.yml) precisely so /releases/latest keeps
-     pointing arm64 users, who are almost everyone, at an APK that installs
-     on their device. That means it never shows up in the fetch above, so an
-     x86 visitor otherwise has no way to find it short of already knowing it
-     exists and reading the tag list by hand. */
-  var x64Link = document.getElementById("x64Link");
-  if (x64Link) {
-    fetch("https://api.github.com/repos/aerium-browser/aerium-browser-android/releases?per_page=10",
-          { headers: { Accept: "application/vnd.github+json" } })
+  var cached = null;
+  try { cached = JSON.parse(sessionStorage.getItem("aerium.rel") || "null"); } catch (e) {}
+  if (cached) {
+    fill(cached);
+  } else {
+    fetch(API + "/latest", HEADERS)
       .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function (list) {
-        var x64 = null;
-        for (var i = 0; i < (list || []).length; i++) {
-          if (/-x64-/.test(list[i].tag_name)) { x64 = list[i]; break; }
-        }
-        if (!x64) return;
-        var asset = null;
-        (x64.assets || []).forEach(function (a) {
-          if (/\.apk$/i.test(a.name)) asset = a;
-        });
-        x64Link.href = (asset && asset.browser_download_url) || x64.html_url;
-        x64Link.hidden = false;
+      .then(function (data) {
+        var slim = {
+          tag_name: data.tag_name,
+          published_at: data.published_at,
+          html_url: data.html_url,
+          assets: (data.assets || []).map(function (a) {
+            return { name: a.name, size: a.size, browser_download_url: a.browser_download_url };
+          })
+        };
+        try { sessionStorage.setItem("aerium.rel", JSON.stringify(slim)); } catch (e) {}
+        fill(slim);
       })
       .catch(function () {});
   }
 
-  /* ---------- device readout, shown when a download is clicked ---------- */
-  var specs = document.getElementById("specs");
-  var specsList = document.getElementById("specsList");
-  var specsHint = document.getElementById("specsHint");
-
-  var ARCH_LABEL = { arm64: "ARM64", arm32: "ARM 32-bit", x86_64: "x86_64", x86: "x86 32-bit" };
-  var OS_LABEL = { windows: "Windows", linux: "Linux", android: "Android" };
-
-  function row(term, value) {
-    return value
-      ? '<div class="spec"><dt>' + clean(term) + "</dt><dd>" + clean(value) + "</dd></div>"
-      : "";
-  }
-
-  function hintFor(clickedOs, arch) {
-    if (clickedOs !== myOs) {
-      return myOs
-        ? "That is the " + OS_LABEL[clickedOs] + " build, and this looks like " +
-          OS_LABEL[myOs] + ". Grab it if you are downloading for another machine."
-        : "We could not work out which platform you are on, so check the file name before you run it.";
-    }
-    if (clickedOs === "windows") {
-      return arch === "arm64"
-        ? "We build for x64 only. Windows on ARM will run it under emulation."
-        : "The x64 installer is the right one for this machine.";
-    }
-    if (clickedOs === "linux") {
-      if (arch === "arm64") return "The arm64 AppImage is yours. Mark it executable and run it, no install needed.";
-      if (arch === "x86_64") return "The x86_64 AppImage is yours. Mark it executable and run it, no install needed.";
-      return "Pick the AppImage matching your architecture, mark it executable and run it.";
-    }
-    if (arch === "x86_64" || arch === "x86") {
-      return "This looks like an x86 device. Our main APK is arm64-v8a; the “x86_64 build” link on this card is the one for you.";
-    }
-    if (arch === "arm32") {
-      return "This looks like a 32-bit ARM device. We only build arm64-v8a, which will not install here.";
-    }
-    return "The arm64-v8a APK is the one we ship. Around 300 MB, because extension support means a desktop-class build.";
-  }
-
-  function showSpecs(clickedOs) {
-    if (!specs) return;
-    deviceInfo.then(function (hi) {
-      var arch = hi.arch;
-      var html = "";
-      html += row("Operating system", myOs ? OS_LABEL[myOs] : "not recognised");
-      html += row("Architecture", arch ? (ARCH_LABEL[arch] || arch) : "could not detect");
-      if (hi.platformVersion) html += row("OS version", hi.platformVersion);
-      if (hi.model) html += row("Device", hi.model);
-      if (navigator.deviceMemory) html += row("Memory", navigator.deviceMemory + " GB or more");
-      if (navigator.hardwareConcurrency) html += row("CPU threads", navigator.hardwareConcurrency);
-      if (window.screen) {
-        html += row("Screen", screen.width + " by " + screen.height +
-          " at " + (window.devicePixelRatio || 1) + "x");
+  fetch(API + "?per_page=10", HEADERS)
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (list) {
+      var x64 = null;
+      for (var i = 0; i < (list || []).length; i++) {
+        if (/-x64-/.test(list[i].tag_name)) { x64 = list[i]; break; }
       }
-      specsList.innerHTML = html;
-      specsHint.textContent = hintFor(clickedOs, arch);
-      specs.hidden = false;
-    });
-  }
-
-  document.querySelectorAll(".platform-card a.btn-primary").forEach(function (a) {
-    a.addEventListener("click", function () {
-      var card = a.closest(".platform-card");
-      showSpecs(card ? card.getAttribute("data-os") : null);
-    });
-  });
-
+      if (!x64) return;
+      var link = document.getElementById("x64Link");
+      var apk = null;
+      (x64.assets || []).forEach(function (a) { if (/\.apk$/i.test(a.name)) apk = a; });
+      link.href = (apk && apk.browser_download_url) || x64.html_url;
+      link.hidden = false;
+    })
+    .catch(function () {});
 })();
 </script>
-
 </body>
 </html>
