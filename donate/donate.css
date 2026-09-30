@@ -1,0 +1,63 @@
+@font-face{font-family:"Onest"; font-style:normal; font-weight:100 900; font-display:swap; src:url(/fonts/onest-latin.woff2) format("woff2"); unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Onest"; font-style:normal; font-weight:100 900; font-display:swap; src:url(/fonts/onest-latin-ext.woff2) format("woff2"); unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+:root{
+ --bg:#ffffff; --fg:#111827; --dim:#5b6474; --line:#d5d9e0;
+ --navy:#1b2c5e; --on-navy:#ffffff; --panel-b:#f1f2f4;
+}
+@media (prefers-color-scheme:dark){
+ :root{
+  --bg:#0e1116; --fg:#eef1f6; --dim:#a3abba; --line:#2a303b;
+  --navy:#22386f; --panel-b:#171a20;
+ }
+}
+*{box-sizing:border-box}
+html{scrollbar-width:thin; scrollbar-color:rgba(128,128,128,.4) transparent}
+::-webkit-scrollbar{width:8px; height:8px; background:transparent}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(128,128,128,.4); border-radius:8px; border:2px solid transparent; background-clip:content-box}
+body{margin:0; background:var(--bg); color:var(--fg); font-family:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1440px; min-height:100vh; margin:0 auto; padding:0 64px; display:flex; flex-direction:column}
+
+header{height:80px; flex:none; display:flex; align-items:center; justify-content:space-between}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-size:18px; font-weight:700}
+header nav{display:flex; align-items:center; gap:32px; font-size:15px; font-weight:500}
+header nav a{text-decoration:none}
+header nav a:not(.pill):hover{color:var(--dim)}
+.pill{display:inline-flex; align-items:center; height:44px; padding:0 22px; border-radius:22px; background:var(--navy); color:var(--on-navy); font-weight:600; text-decoration:none}
+
+main{flex:1; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; align-items:center; padding:48px 0 96px}
+.text{grid-column:span 5}
+h1{margin:0; font-size:60px; font-weight:700; line-height:1.02; letter-spacing:-.035em}
+.lead{margin:20px 0 0; font-size:19px; color:var(--dim)}
+.addr{margin:32px 0 0; padding:16px 18px; border-radius:16px; background:var(--panel-b); font:14px/1.5 ui-monospace,"SF Mono",Menlo,Consolas,monospace; word-break:break-all}
+.actions{display:flex; gap:12px; margin-top:16px}
+.btn{display:inline-flex; align-items:center; justify-content:center; height:52px; padding:0 26px; border-radius:26px; font:600 16px "Onest",system-ui,sans-serif; text-decoration:none; cursor:pointer; white-space:nowrap; transition:opacity .15s}
+.btn:hover{opacity:.88}
+.btn-primary{background:var(--navy); color:var(--on-navy); border:0}
+.btn-ghost{background:transparent; color:var(--fg); border:1px solid var(--line)}
+.hint{margin:14px 0 0; font-size:14px; color:var(--dim)}
+.other{margin:40px 0 0; font-size:15px; color:var(--dim)}
+.other a{color:var(--fg); font-weight:600}
+
+.panel{grid-column:7 / span 6; height:560px; border-radius:40px; background:var(--navy); display:flex; align-items:center; justify-content:center}
+.qr{padding:24px; border-radius:28px; background:#ffffff; box-shadow:0 30px 60px -20px rgba(0,0,0,.35)}
+.qr img{display:block; width:240px; height:240px}
+
+footer{flex:none; padding:40px 0; display:flex; justify-content:space-between; gap:24px; font-size:13px; color:var(--dim)}
+footer nav{display:flex; gap:24px}
+footer nav a{text-decoration:none}
+footer nav a:hover{color:var(--fg)}
+
+@media (max-width:900px){
+ .wrap{padding:0 24px}
+ header{height:60px}
+ header nav a:not(.pill){display:none}
+ main{display:flex; flex-direction:column; align-items:stretch; padding:32px 0 56px}
+ h1{font-size:40px}
+ .lead{font-size:17px; margin-top:14px}
+ .panel{order:-1; margin:0 -8px 32px; height:360px; border-radius:32px}
+ .qr img{width:200px; height:200px}
+ .actions{flex-direction:column}
+ footer{flex-direction:column-reverse; padding:32px 0}
+}
