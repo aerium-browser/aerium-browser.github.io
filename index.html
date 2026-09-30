@@ -124,7 +124,7 @@
  .brand{display:flex; align-items:center; gap:10px; text-decoration:none; font-size:18px; font-weight:700}
  nav{display:flex; align-items:center; gap:32px; font-size:15px; font-weight:500}
  nav a{text-decoration:none}
- nav a:not(.pill):hover{color:var(--dim)}
+ header nav a:not(.pill):hover{color:var(--dim)}
 
  .pill{display:inline-flex; align-items:center; justify-content:center; height:44px; padding:0 22px; border-radius:22px; background:var(--navy); color:var(--on-navy); font-weight:600; text-decoration:none; white-space:nowrap}
  .btn{display:inline-flex; align-items:center; justify-content:center; height:56px; padding:0 30px; border-radius:28px; font-size:16px; font-weight:600; text-decoration:none; white-space:nowrap; transition:opacity .15s}
@@ -164,7 +164,7 @@
  .get .links a:hover{color:var(--on-navy)}
 
  footer{padding:48px 0 40px; display:flex; justify-content:space-between; gap:24px; font-size:13px; color:var(--dim)}
- footer nav{gap:24px; font-size:13px; font-weight:400}
+ footer nav{gap:12px 24px; flex-wrap:wrap; font-size:13px; font-weight:400}
  footer nav a:hover{color:var(--fg)}
 
  html.js .row .text, html.js .row .panel, html.js .aerogel, html.js .get{opacity:0; transform:translateY(40px); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1)}
@@ -190,7 +190,7 @@
  @media (max-width:900px){
   .wrap{padding:0 24px}
   header{height:60px}
-  nav a:not(.pill){display:none}
+  header nav a:not(.pill){display:none}
   .row, .row.flip{display:flex; flex-direction:column; align-items:stretch; padding-top:64px}
   .row.hero{padding-top:32px}
   .row .panel, .row.flip .panel{margin:28px -8px 0; height:680px; border-radius:32px}
