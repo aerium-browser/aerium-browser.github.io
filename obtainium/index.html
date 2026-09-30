@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Donate Litecoin to Aerium</title>
-<meta name="description" content="Support Aerium with a Litecoin donation. Scan the QR code, open your wallet or copy the address.">
+<title>Add Aerium to Obtainium</title>
+<meta name="description" content="Track Aerium releases in Obtainium and install every update from one place.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://aerium-browser.github.io/donate/ltc/">
+<link rel="canonical" href="https://aerium-browser.github.io/obtainium/">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
-<meta http-equiv="refresh" content="0; url=litecoin:ltc1q8cpevsanzlmuc0ja8d0eltj72qk55nu7dty59v">
+<meta http-equiv="refresh" content="0; url=obtainium://app/%7B%22id%22%3A%22io.dioide.aerium%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Faerium-browser%2Faerium-browser-android%22%2C%22author%22%3A%22aerium-browser%22%2C%22name%22%3A%22Aerium%22%7D">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -35,18 +35,17 @@
 
 <main>
  <div class="text">
-  <h1>Donate Litecoin</h1>
-  <p class="lead">Aerium runs on donations and spare time. No ads, no data sales.</p>
-  <div class="addr" id="addr">ltc1q8cpevsanzlmuc0ja8d0eltj72qk55nu7dty59v</div>
+  <h1>Add Aerium to Obtainium</h1>
+  <p class="lead">Obtainium watches for new Aerium releases and installs each update for you.</p>
   <div class="actions">
-   <a class="btn btn-primary" href="litecoin:ltc1q8cpevsanzlmuc0ja8d0eltj72qk55nu7dty59v">Open in wallet</a>
-   <button class="btn btn-ghost" id="copy" type="button">Copy address</button>
+   <a class="btn btn-primary" href="obtainium://app/%7B%22id%22%3A%22io.dioide.aerium%22%2C%22url%22%3A%22https%3A%2F%2Fgithub.com%2Faerium-browser%2Faerium-browser-android%22%2C%22author%22%3A%22aerium-browser%22%2C%22name%22%3A%22Aerium%22%7D">Open in Obtainium</a>
+   <a class="btn btn-ghost" href="https://github.com/ImranR98/Obtainium/releases/latest">Get Obtainium</a>
   </div>
-  <p class="hint">Your wallet app opens on its own if one is installed.</p>
-  <p class="other">Prefer Monero? <a href="/donate/xmr/">Donate Monero</a></p>
+  <p class="hint">Obtainium opens on its own if it is installed.</p>
+  <p class="other">Rather download directly? <a href="/#download">Get the APK</a></p>
  </div>
  <div class="panel">
-  <div class="qr"><img src="qr.png" width="240" height="240" alt="Litecoin donation QR code"></div>
+  <div class="qr"><svg width="160" height="160" viewBox="0 0 512 512" aria-hidden="true"><path d="M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z" fill="#1B2C5E"/><path d="M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z" fill="#2A4485"/><path d="M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z" fill="#111C42"/><circle cx="256" cy="256" r="134" fill="#E9F1FB"/><circle cx="256" cy="256" r="104" fill="#2C6BAE"/><circle cx="238" cy="236" r="82" fill="#4C97CF"/><circle cx="222" cy="218" r="46" fill="#7FC4E4"/></svg></div>
  </div>
 </main>
 
@@ -60,30 +59,5 @@
 </footer>
 
 </div>
-<script>
-(function () {
-  "use strict";
-  var button = document.getElementById("copy");
-  var address = document.getElementById("addr");
-  function done() {
-    button.textContent = "Copied";
-    setTimeout(function () { button.textContent = "Copy address"; }, 2000);
-  }
-  function select() {
-    var range = document.createRange();
-    range.selectNodeContents(address);
-    var selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
-  }
-  button.addEventListener("click", function () {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(address.textContent.trim()).then(done, select);
-    } else {
-      select();
-    }
-  });
-})();
-</script>
 </body>
 </html>
