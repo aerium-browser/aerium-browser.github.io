@@ -1,0 +1,40 @@
+name: badges
+
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  badges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Count releases and downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --paginate --slurp 'repos/aerium-browser/aerium-browser-android/releases?per_page=100' > releases.json
+          python3 - <<'PY'
+          import json
+          pages = json.load(open('releases.json'))
+          releases = [r for page in pages for r in page if not r['draft'] and not r['prerelease']]
+          total = sum(a['download_count'] for r in releases for a in r['assets'] if a['name'].endswith('.apk'))
+          latest = max(releases, key=lambda r: r['published_at'])['tag_name'] if releases else 'none'
+          def short(n):
+              return f'{n / 1000:.1f}k'.replace('.0k', 'k') if n >= 1000 else str(n)
+          for name, label, message in (('downloads', 'downloads', short(total)), ('release', 'release', latest)):
+              with open(f'badges/{name}.json', 'w') as f:
+                  json.dump({'schemaVersion': 1, 'label': label, 'message': message, 'color': '1b2c5e'}, f)
+                  f.write('\n')
+          PY
+          rm releases.json
+      - name: Commit if changed
+        run: |
+          git add badges
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m "update badges"
+          git push
