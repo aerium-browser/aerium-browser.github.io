@@ -162,6 +162,13 @@
  .get .links{margin-top:14px; display:flex; gap:20px; font-size:14px}
  .get .links a{color:var(--on-navy-dim)}
  .get .links a:hover{color:var(--on-navy)}
+ .get .cert{margin-top:22px; font-size:13px}
+ .get .cert a{color:var(--on-navy-dim)}
+ .get .cert a:hover{color:var(--on-navy)}
+ .get .cert code{display:block; margin-top:6px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; line-height:1.6; color:var(--on-navy); word-break:break-all}
+ .get .side{display:flex; flex-direction:column; align-items:center; gap:16px; flex-shrink:0}
+ .play{display:flex; flex-direction:column; align-items:center; gap:6px; font-size:13px; color:var(--on-navy-dim)}
+ .play img{display:block; width:195px; height:58px}
 
  footer{padding:48px 0 40px; display:flex; justify-content:space-between; gap:24px; font-size:13px; color:var(--dim)}
  footer nav{gap:12px 24px; flex-wrap:wrap; font-size:13px; font-weight:400}
@@ -206,6 +213,8 @@
   .get{margin:56px -8px 0; padding:40px 24px; border-radius:28px; flex-direction:column; align-items:stretch}
   .get h2{font-size:30px}
   .get p{font-size:15px}
+  .get .side{align-items:stretch}
+  .play img{width:175px; height:52px}
   .btn-light{height:52px}
   footer{flex-direction:column-reverse; padding:32px 0}
  }
@@ -287,12 +296,16 @@
    <a href="https://github.com/aerium-browser/aerium-browser-android/releases">All releases</a>
    <a id="x64Link" href="https://github.com/aerium-browser/aerium-browser-android/releases" hidden>x86_64 build</a>
   </div>
+  <p class="cert">Signing certificate SHA-256 · <a href="https://github.com/soupslurpr/AppVerifier">check it with AppVerifier</a><code>CE:1E:D2:FD:85:72:EA:D4:B5:D1:3B:9A:FE:85:DC:89:8C:61:9F:33:E5:D0:E1:9F:18:94:11:54:D1:F3:34:B2</code></p>
  </div>
- <a class="btn btn-light dl" href="https://github.com/aerium-browser/aerium-browser-android/releases/latest">Download APK</a>
+ <div class="side">
+  <a class="btn btn-light dl" href="https://github.com/aerium-browser/aerium-browser-android/releases/latest">Download APK</a>
+  <div class="play"><img src="/brand/google-play.png" width="195" height="58" loading="lazy" alt="Get it on Google Play"><span>Coming soon</span></div>
+ </div>
 </section>
 </main>
 
-<footer>
+<footer id="support">
  <span>Aerium by Dioide. Free and open source under GPL-2.0.</span>
  <nav>
   <a href="/donate/xmr/">Donate XMR</a>
