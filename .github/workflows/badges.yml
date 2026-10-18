@@ -17,7 +17,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh api --paginate --slurp 'repos/aerium-browser/aerium-browser-android/releases?per_page=100' > releases.json
+          gh api --paginate --slurp 'repos/aerium-browser/aerium-browser-core/releases?per_page=100' > releases.json
           python3 - <<'PY'
           import json
           pages = json.load(open('releases.json'))
