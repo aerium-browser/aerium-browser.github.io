@@ -3,4 +3,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aerium-browser.github.io/sitemap.xml
+Sitemap: https://aeriumbrowser.com/sitemap.xml
