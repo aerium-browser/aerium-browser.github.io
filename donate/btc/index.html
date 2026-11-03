@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate Bitcoin to Aerium</title>
+<meta name="description" content="Support Aerium with a Bitcoin Lightning donation. Scan the QR code, open your wallet or copy the address.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aeriumbrowser.com/donate/btc/">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
+
+<meta http-equiv="refresh" content="0; url=lightning:aerium@cake.cash">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/page.css">
+</head>
+<body>
+<div class="wrap">
+
+<header>
+ <a class="brand" href="/">
+  <svg width="28" height="28" viewBox="0 0 512 512" aria-hidden="true"><path d="M330 384.17 149.1 488.61A256 256 0 0 1 108 47.12L108 256A148 148 0 0 0 330 384.17Z" fill="#1B2C5E"/><path d="M108 256 108 47.12A256 256 0 0 1 510.9 232.27L330 127.83A148 148 0 0 0 108 256Z" fill="#2A4485"/><path d="M330 127.83 510.9 232.27A256 256 0 0 1 149.1 488.61L330 384.17A148 148 0 0 0 330 127.83Z" fill="#111C42"/><circle cx="256" cy="256" r="134" fill="#E9F1FB"/><circle cx="256" cy="256" r="104" fill="#2C6BAE"/><circle cx="238" cy="236" r="82" fill="#4C97CF"/><circle cx="222" cy="218" r="46" fill="#7FC4E4"/></svg>
+  Aerium
+ </a>
+ <nav>
+  <a href="/#extensions">Extensions</a>
+  <a href="/#privacy">Privacy</a>
+  <a href="https://github.com/aerium-browser/aerium-browser-core">Source code</a>
+  <a class="pill" href="/#download">Download</a>
+ </nav>
+</header>
+
+<main>
+ <div class="text">
+  <h1>Donate Bitcoin</h1>
+  <p class="lead">Aerium runs on donations and spare time. No ads, no data sales.</p>
+  <p class="hint">Lightning address. Works with any Lightning wallet.</p>
+  <div class="addr" id="addr">aerium@cake.cash</div>
+  <div class="actions">
+   <a class="btn btn-primary" href="lightning:aerium@cake.cash">Open in wallet</a>
+   <button class="btn btn-ghost" id="copy" type="button">Copy address</button>
+  </div>
+  <p class="hint">Your wallet app opens on its own if one is installed.</p>
+  <p class="other">Prefer Monero? <a href="/donate/xmr/">Donate Monero</a></p>
+ </div>
+ <div class="panel">
+  <div class="qr"><img src="qr.png" width="240" height="240" alt="Bitcoin Lightning donation QR code"></div>
+ </div>
+</main>
+
+<footer>
+ <span>Aerium Browser. The engine is open source under GPL-3.0.</span>
+ <nav>
+  <a href="/donate/xmr/">Donate XMR</a>
+  <a href="/donate/ltc/">Donate LTC</a>
+  <a href="/donate/btc/">Donate BTC</a>
+  <a href="https://github.com/aerium-browser/aerium-browser-core">Source code</a>
+ </nav>
+</footer>
+
+</div>
+<script>
+(function () {
+  "use strict";
+  var button = document.getElementById("copy");
+  var address = document.getElementById("addr");
+  function done() {
+    button.textContent = "Copied";
+    setTimeout(function () { button.textContent = "Copy address"; }, 2000);
+  }
+  function select() {
+    var range = document.createRange();
+    range.selectNodeContents(address);
+    var selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+  button.addEventListener("click", function () {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(address.textContent.trim()).then(done, select);
+    } else {
+      select();
+    }
+  });
+})();
+</script>
+</body>
+</html>
