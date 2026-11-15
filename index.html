@@ -63,6 +63,7 @@
       "screenshot": [
         "https://aeriumbrowser.com/shots/browse-black.webp",
         "https://aeriumbrowser.com/shots/extensions.webp",
+        "https://aeriumbrowser.com/shots/tabs-toolbar.webp",
         "https://aeriumbrowser.com/shots/settings-guard.webp",
         "https://aeriumbrowser.com/shots/settings-backup.webp"
       ],
@@ -78,6 +79,8 @@
         "Aerium Guard privacy, security and speed options",
         "Backup and restore of tabs, site permissions and settings",
         "Background media playback",
+        "Address bar on top or at the bottom, with a toolbar you build yourself",
+        "Desktop style tabs",
         "Per-site cookie and data clearing rules"
       ],
       "isAccessibleForFree": true,
@@ -169,6 +172,7 @@
  .get .side{display:flex; flex-direction:column; align-items:center; gap:16px; flex-shrink:0}
  .play{display:flex; flex-direction:column; align-items:center; gap:6px; font-size:13px; color:var(--on-navy-dim)}
  .play img{display:block; width:195px; height:58px}
+ .play span a{color:var(--on-navy)}
 
  footer{padding:48px 0 40px; display:flex; justify-content:space-between; gap:24px; font-size:13px; color:var(--dim)}
  footer nav{gap:12px 24px; flex-wrap:wrap; font-size:13px; font-weight:400}
@@ -261,23 +265,33 @@
  </div>
 </section>
 
-<section class="row" id="privacy">
+<section class="row" id="yours">
+ <div class="text">
+  <h2>Yours to arrange.</h2>
+  <p>Address bar on top or at the bottom, a toolbar you build button by button, a second row of buttons and tabs across the top like on a computer.</p>
+ </div>
+ <div class="panel b">
+  <div class="phone"><img src="/shots/tabs-toolbar.webp" width="282" height="610" loading="lazy" alt="Aerium with desktop style tabs across the top, the address bar and a second row of back, forward, new tab and home buttons"></div>
+ </div>
+</section>
+
+<section class="row flip" id="privacy">
+ <div class="panel a">
+  <div class="phone"><img src="/shots/settings-guard.webp" width="282" height="610" loading="lazy" alt="Aerium Guard with the Recommended, Privacy, Performance and Security modes and saved profiles"></div>
+ </div>
  <div class="text">
   <h2>Private by default.</h2>
   <p>No telemetry, no big tech services. Aerium Guard sets privacy, security and speed in one place, and new security releases are picked up within a day.</p>
  </div>
- <div class="panel b">
-  <div class="phone"><img src="/shots/settings-guard.webp" width="282" height="610" loading="lazy" alt="Aerium Guard with the Recommended, Privacy, Performance and Security modes and saved profiles"></div>
- </div>
 </section>
 
-<section class="row flip">
- <div class="panel a">
-  <div class="phone"><img src="/shots/settings-backup.webp" width="282" height="610" loading="lazy" alt="Aerium backup and restore with settings, site rules, tabs, bookmarks and extensions"></div>
- </div>
+<section class="row">
  <div class="text">
   <h2>Take it with you.</h2>
   <p>Back up your open tabs, site permissions and settings, and bring them back on any phone.</p>
+ </div>
+ <div class="panel b">
+  <div class="phone"><img src="/shots/settings-backup.webp" width="282" height="610" loading="lazy" alt="Aerium backup and restore with settings, site rules, tabs, bookmarks and extensions"></div>
  </div>
 </section>
 
@@ -300,7 +314,7 @@
  </div>
  <div class="side">
   <a class="btn btn-light dl" href="https://github.com/aerium-browser/aerium-browser-core/releases/latest">Download APK</a>
-  <div class="play"><img src="/brand/google-play.png" width="195" height="58" loading="lazy" alt="Get it on Google Play"><span>Coming soon</span></div>
+  <div class="play"><a href="https://play.google.com/store/apps/details?id=com.aeriumbrowser.android"><img src="/brand/google-play.png" width="195" height="58" loading="lazy" alt="Get it on Google Play"></a><span>Closed test, open to everyone · <a href="https://github.com/aerium-browser/aerium-browser-core#google-play">How to join</a></span></div>
  </div>
 </section>
 </main>
