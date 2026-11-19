@@ -91,7 +91,7 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-      "downloadUrl": "https://github.com/aerium-browser/aerium-browser-core/releases/latest",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.aeriumbrowser.android",
       "sameAs": ["https://github.com/aerium-browser/aerium-browser-core"]
     }
   ]
@@ -162,13 +162,12 @@
 
  .get{margin-top:104px; padding:72px; border-radius:40px; background:var(--navy); color:var(--on-navy); display:flex; align-items:center; justify-content:space-between; gap:32px}
  .get p{margin:12px 0 0; font-size:17px; color:var(--on-navy-dim)}
- .get .links{margin-top:14px; display:flex; gap:20px; font-size:14px}
- .get .links a{color:var(--on-navy-dim)}
- .get .links a:hover{color:var(--on-navy)}
- .get .cert{margin-top:22px; font-size:13px}
- .get .cert a{color:var(--on-navy-dim)}
- .get .cert a:hover{color:var(--on-navy)}
- .get .cert code{display:block; margin-top:6px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; line-height:1.6; color:var(--on-navy); word-break:break-all}
+ .get .steps{list-style:none; margin:22px 0 0; padding:0; display:flex; flex-direction:column; gap:12px; font-size:17px; color:var(--on-navy)}
+ .get .steps li{display:flex; align-items:center; gap:14px}
+ .get .steps span{flex:none; width:30px; height:30px; border-radius:50%; display:grid; place-items:center; background:rgba(255,255,255,.12); font-size:14px; font-weight:600}
+ .get .steps a{color:var(--on-navy); text-decoration:underline; text-underline-offset:3px}
+ .get .steps a:hover{color:#ffffff}
+ .get .note{font-size:14px}
  .get .side{display:flex; flex-direction:column; align-items:center; gap:16px; flex-shrink:0}
  .play{display:flex; flex-direction:column; align-items:center; gap:6px; font-size:13px; color:var(--on-navy-dim)}
  .play img{display:block; width:195px; height:58px}
@@ -217,6 +216,7 @@
   .get{margin:56px -8px 0; padding:40px 24px; border-radius:28px; flex-direction:column; align-items:stretch}
   .get h2{font-size:30px}
   .get p{font-size:15px}
+  .get .steps{font-size:15px}
   .get .side{align-items:stretch}
   .play img{width:175px; height:52px}
   .btn-light{height:52px}
@@ -236,7 +236,7 @@
   <a href="#extensions">Extensions</a>
   <a href="#privacy">Privacy</a>
   <a href="https://github.com/aerium-browser/aerium-browser-core">Source code</a>
-  <a class="pill" href="#download">Download</a>
+  <a class="pill" href="#download">Get Aerium</a>
  </nav>
 </header>
 
@@ -246,7 +246,7 @@
   <h1>The browser that stays out of the way.</h1>
   <p class="lead">Desktop extensions on Android. No big tech inside.</p>
   <div class="ctas">
-   <a class="btn btn-primary dl" href="https://github.com/aerium-browser/aerium-browser-core/releases/latest">Download for Android</a>
+   <a class="btn btn-primary" href="#download">Join the closed test</a>
    <a class="btn btn-ghost" href="https://github.com/aerium-browser/aerium-browser-core">View source</a>
   </div>
  </div>
@@ -303,18 +303,17 @@
 <section class="get" id="download">
  <div>
   <h2>Get Aerium for Android</h2>
-  <p id="relLine">Free · open source engine · arm64 · about 300&nbsp;MB</p>
-  <div class="links">
-   <a id="changelogLink" href="https://github.com/aerium-browser/aerium-browser-core/releases/latest">Changelog</a>
-   <a href="/obtainium/">Add to Obtainium</a>
-   <a href="https://github.com/aerium-browser/aerium-browser-core/releases">All releases</a>
-   <a id="x64Link" href="https://github.com/aerium-browser/aerium-browser-core/releases" hidden>x86_64 build</a>
-  </div>
-  <p class="cert">Signing certificate SHA-256 · <a href="https://github.com/soupslurpr/AppVerifier">check it with AppVerifier</a><code>CE:1E:D2:FD:85:72:EA:D4:B5:D1:3B:9A:FE:85:DC:89:8C:61:9F:33:E5:D0:E1:9F:18:94:11:54:D1:F3:34:B2</code></p>
+  <p>Aerium is in closed testing on Google Play, and anyone can join. Use the same Google account for every step.</p>
+  <ol class="steps">
+   <li><span>1</span><div><b>Join</b> the <a href="https://groups.google.com/g/aeriumbrowser">Aerium testers group</a></div></li>
+   <li><span>2</span><div><b>Opt in</b> on the <a href="https://play.google.com/apps/testing/com.aeriumbrowser.android">testing page</a></div></li>
+   <li><span>3</span><div><b>Install</b> from <a href="https://play.google.com/store/apps/details?id=com.aeriumbrowser.android">Google Play</a></div></li>
+  </ol>
+  <p class="note">Google Play can take a few minutes to show the app after you join.</p>
  </div>
  <div class="side">
-  <a class="btn btn-light dl" href="https://github.com/aerium-browser/aerium-browser-core/releases/latest">Download APK</a>
-  <div class="play"><a href="https://play.google.com/store/apps/details?id=com.aeriumbrowser.android"><img src="/brand/google-play.png" width="195" height="58" loading="lazy" alt="Get it on Google Play"></a><span>Closed test, open to everyone · <a href="https://github.com/aerium-browser/aerium-browser-core#google-play">How to join</a></span></div>
+  <a class="btn btn-light" href="https://groups.google.com/g/aeriumbrowser">Join the testers group</a>
+  <div class="play"><a href="https://play.google.com/store/apps/details?id=com.aeriumbrowser.android"><img src="/brand/google-play.png" width="195" height="58" loading="lazy" alt="Get it on Google Play"></a><span>Closed test, open to everyone</span></div>
  </div>
 </section>
 </main>
@@ -346,73 +345,6 @@
     revealables.forEach(function (el) { el.classList.add("in"); });
   }
 
-  var API = "https://api.github.com/repos/aerium-browser/aerium-browser-core/releases";
-  var HEADERS = { headers: { Accept: "application/vnd.github+json" } };
-
-  function human(bytes) {
-    var mb = bytes / (1024 * 1024);
-    return mb >= 1024 ? (mb / 1024).toFixed(1) + "\u00a0GB" : Math.round(mb) + "\u00a0MB";
-  }
-
-  function fill(data) {
-    if (!data || !data.tag_name) return;
-    var apk = null;
-    (data.assets || []).forEach(function (a) {
-      if (!apk && /arm64-v8a\.apk$/i.test(a.name)) apk = a;
-    });
-    (data.assets || []).forEach(function (a) {
-      if (!apk && /\.apk$/i.test(a.name)) apk = a;
-    });
-    var parts = [data.tag_name];
-    if (data.published_at) {
-      parts.push(new Date(data.published_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }));
-    }
-    parts.push("arm64");
-    if (apk && apk.size) parts.push(human(apk.size));
-    document.getElementById("relLine").textContent = parts.join(" · ");
-    if (apk && apk.browser_download_url) {
-      document.querySelectorAll("a.dl").forEach(function (a) { a.href = apk.browser_download_url; });
-    }
-    if (data.html_url) document.getElementById("changelogLink").href = data.html_url;
-  }
-
-  var cached = null;
-  try { cached = JSON.parse(sessionStorage.getItem("aerium.rel") || "null"); } catch (e) {}
-  if (cached) {
-    fill(cached);
-  } else {
-    fetch(API + "/latest", HEADERS)
-      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function (data) {
-        var slim = {
-          tag_name: data.tag_name,
-          published_at: data.published_at,
-          html_url: data.html_url,
-          assets: (data.assets || []).map(function (a) {
-            return { name: a.name, size: a.size, browser_download_url: a.browser_download_url };
-          })
-        };
-        try { sessionStorage.setItem("aerium.rel", JSON.stringify(slim)); } catch (e) {}
-        fill(slim);
-      })
-      .catch(function () {});
-  }
-
-  fetch(API + "?per_page=10", HEADERS)
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function (list) {
-      var x64 = null;
-      for (var i = 0; i < (list || []).length; i++) {
-        if (/-x64-/.test(list[i].tag_name)) { x64 = list[i]; break; }
-      }
-      if (!x64) return;
-      var link = document.getElementById("x64Link");
-      var apk = null;
-      (x64.assets || []).forEach(function (a) { if (/\.apk$/i.test(a.name)) apk = a; });
-      link.href = (apk && apk.browser_download_url) || x64.html_url;
-      link.hidden = false;
-    })
-    .catch(function () {});
 })();
 </script>
 </body>
