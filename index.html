@@ -156,6 +156,13 @@
  .phone{width:300px; padding:9px; border-radius:46px; background:#1c1d21; box-shadow:0 30px 60px -20px rgba(0,0,0,.35)}
  .phone img{display:block; width:282px; height:610px; object-fit:cover; object-position:top; border-radius:38px; background:#000}
 
+ .more{padding-top:136px}
+ .more h2{font-size:44px; text-align:center}
+ .more .grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:48px}
+ .more .card{padding:32px; border-radius:32px; background:var(--panel-b)}
+ .more h3{margin:0; font-size:22px; font-weight:700; letter-spacing:-.01em}
+ .more p{margin:10px 0 0; font-size:17px; color:var(--dim)}
+
  .aerogel{padding-top:136px; text-align:center}
  .aerogel h2{font-size:44px}
  .aerogel p{margin:14px auto 0; max-width:520px; font-size:19px; color:var(--dim)}
@@ -193,6 +200,7 @@
  }
 
  @media (max-width:1100px){
+  .more .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   h1{font-size:56px}
   h2{font-size:44px}
   .panel{height:680px}
@@ -210,6 +218,12 @@
   .lead, .row p{font-size:17px; margin-top:14px}
   .ctas{flex-direction:column; margin-top:28px}
   .btn{height:52px}
+  .more{padding-top:64px}
+  .more h2{font-size:32px; text-align:left}
+  .more .grid{grid-template-columns:1fr; gap:12px; margin-top:28px}
+  .more .card{padding:24px; border-radius:24px}
+  .more h3{font-size:19px}
+  .more p{font-size:15px}
   .aerogel{padding-top:64px; text-align:left}
   .aerogel h2{font-size:32px}
   .aerogel p{margin-left:0; font-size:17px}
@@ -281,7 +295,7 @@
  </div>
  <div class="text">
   <h2>Private by default.</h2>
-  <p>No telemetry, no big tech services. Aerium Guard sets privacy, security and speed in one place, and Aerium is built straight from Chromium, so it stays on the same version as Chrome.</p>
+  <p>No telemetry, no big tech services. Aerium Guard sets privacy, security and speed in one place, and in its Privacy mode sites see a different fingerprint every session.</p>
  </div>
 </section>
 
@@ -292,6 +306,18 @@
  </div>
  <div class="panel b">
   <div class="phone"><img src="/shots/settings-backup.webp" width="282" height="610" loading="lazy" alt="Aerium backup and restore with settings, site rules, tabs, bookmarks and extensions"></div>
+ </div>
+</section>
+
+<section class="more" id="more">
+ <h2>Made for daily use.</h2>
+ <div class="grid">
+  <div class="card"><h3>Aerogel</h3><p>Private tabs that keep nothing. Pick sites that always open there, send links from other apps straight in, and choose which extensions come along.</p></div>
+  <div class="card"><h3>Always current</h3><p>Built straight from Chromium with no fork in between, so Aerium stays on the same version as Chrome.</p></div>
+  <div class="card"><h3>Search shortcuts</h3><p>Type a short keyword in the address bar to search Wikipedia, YouTube, GitHub or any site you add.</p></div>
+  <div class="card"><h3>Sleeping tabs</h3><p>Tabs you have not touched in a while let go of memory, so the ones you use stay fast.</p></div>
+  <div class="card"><h3>Mobile data saver</h3><p>Pause images and autoplay, and ask for lighter pages, only while you are on mobile data.</p></div>
+  <div class="card"><h3>Widget and video player</h3><p>A home screen widget in three sizes, and a video player made for phones.</p></div>
  </div>
 </section>
 
@@ -321,6 +347,7 @@
 <footer id="support">
  <span>Aerium Browser. The engine is open source under GPL-3.0. Aerium&trade; and the Aerium logo are trademarks of Aerium Browser and are not covered by that license. Aerium is only published on GitHub, here and on Google Play. We don't run ads and have no official accounts on Reddit or other social networks.</span>
  <nav>
+  <a href="https://github.com/aerium-browser/aerium-browser-core/discussions">Discussions</a>
   <a href="/privacy/">Privacy policy</a>
   <a href="/donate/xmr/">Donate XMR</a>
   <a href="/donate/ltc/">Donate LTC</a>
